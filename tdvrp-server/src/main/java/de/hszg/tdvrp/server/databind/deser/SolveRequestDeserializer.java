@@ -35,16 +35,17 @@ public class SolveRequestDeserializer extends StdDeserializer<SolveRequest> {
         while (jp.nextToken() != JsonToken.END_OBJECT) {
             String fieldname = jp.getCurrentName();
             jp.nextToken();
-            switch (fieldname) {
-                case "tdFunction":
-                    tdFunctionName = jp.getText();
-                    break;
-                case "instance":
-                    instanceName = jp.getText();
-                    break;
-                case "expectedVehicles":
-                    expectedNumberOfVehicles = (Integer) jp.getNumberValue();
-
+            if (jp.getCurrentToken() != JsonToken.VALUE_NULL) {
+                switch (fieldname) {
+                    case "tdFunction":
+                        tdFunctionName = jp.getText();
+                        break;
+                    case "instance":
+                        instanceName = jp.getText();
+                        break;
+                    case "expectedVehicles":
+                        expectedNumberOfVehicles = (Integer) jp.getNumberValue();
+                }
             }
         }
         jp.close();

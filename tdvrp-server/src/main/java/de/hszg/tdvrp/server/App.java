@@ -1,5 +1,6 @@
 package de.hszg.tdvrp.server;
 
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import de.hszg.tdvrp.core.scheduler.Scheduler;
 import de.hszg.tdvrp.core.solver.Solver;
 import de.hszg.tdvrp.scheduler.straight.StraightScheduler;
@@ -42,6 +43,7 @@ public class App {
     private ResourceConfig createResourceConfig() {
         return new ResourceConfig().
                 packages(true, "de.hszg.tdvrp.server").
+                register(JacksonJsonProvider.class).
                 register(new AbstractBinder() {
 
                     @Override
