@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.hszg.tdvrp</groupId>
+    <artifactId>tdvrp</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>Root project of TDRVP solver</name>
+             
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <tdvrp.version>1.0.0</tdvrp.version>
+    </properties>
+    <modules>
+        <module>tdvrp-core</module>
+        <module>tdvrp-instances</module>
+        <module>tdvrp-solver.dummy</module>
+        <module>tdvrp-server</module>
+        <module>tdvrp-tdfactories</module>
+        <module>tdvrp-scheduler.straight</module>
+        <module>tdvrp-example</module>
+    </modules>
+    
+    <dependencyManagement>
+        <dependencies>
+            
+            <dependency>
+                <groupId>de.hszg.tdvrp</groupId>
+                <artifactId>tdvrp-core</artifactId>
+                <version>${tdvrp.version}</version>
+            </dependency>     
+            
+            <dependency>
+                <groupId>de.hszg.tdvrp</groupId>
+                <artifactId>tdvrp-instances</artifactId>
+                <version>${tdvrp.version}</version>
+            </dependency>   
+                        
+            <dependency>
+                <groupId>de.hszg.tdvrp</groupId>
+                <artifactId>tdvrp-tdfactories</artifactId>
+                <version>${tdvrp.version}</version>
+            </dependency>     
+            
+            <dependency>
+                <groupId>de.hszg.tdvrp</groupId>
+                <artifactId>tdvrp-scheduler.straight</artifactId>
+                <version>${tdvrp.version}</version>
+            </dependency>         
+                                   
+            <dependency>
+                <groupId>de.hszg.tdvrp</groupId>
+                <artifactId>tdvrp-solver.dummy</artifactId>
+                <version>${tdvrp.version}</version>
+            </dependency>            
+                
+                 
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.10</version>
+                <scope>test</scope>
+            </dependency> 
+                       
+        </dependencies>
+    </dependencyManagement>
+    
+    
+    <build>
+        <pluginManagement>
+            <plugins>
+       
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    
+    
+
+</project>

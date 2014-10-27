@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>de.hszg.tdvrp</groupId>
+        <artifactId>tdvrp</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <artifactId>tdvrp-example</artifactId>
+    <packaging>jar</packaging>
+    
+    <description>This project contains an example of the interaction of the individual components.</description>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.mainClass>de.hszg.tdvrp.example.App</project.mainClass>
+    </properties>
+    
+    
+    <dependencies>     
+        <dependency>
+            <groupId>de.hszg.tdvrp</groupId>
+            <artifactId>tdvrp-core</artifactId>
+        </dependency>         
+        
+        <dependency>
+            <groupId>de.hszg.tdvrp</groupId>
+            <artifactId>tdvrp-instances</artifactId>
+        </dependency>  
+                          
+        <dependency>
+            <groupId>de.hszg.tdvrp</groupId>
+            <artifactId>tdvrp-tdfactories</artifactId>
+        </dependency>     
+                                            
+        <dependency>
+            <groupId>de.hszg.tdvrp</groupId>
+            <artifactId>tdvrp-scheduler.straight</artifactId>
+        </dependency>         
+                                   
+        <dependency>
+            <groupId>de.hszg.tdvrp</groupId>
+            <artifactId>tdvrp-solver.dummy</artifactId>
+        </dependency>         
+              
+    
+    </dependencies>
+    
+    
+    <build>        
+        <plugins>     
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.3</version>
+                <configuration>
+                    <mainClass>${project.mainClass}</mainClass>                 
+                </configuration>
+            </plugin>
+        </plugins>     
+    </build>
+            
+            
+</project>

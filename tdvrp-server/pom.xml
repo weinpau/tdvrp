@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>de.hszg.tdvrp</groupId>
+        <artifactId>tdvrp</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <artifactId>tdvrp-server</artifactId>
+    <packaging>jar</packaging>
+    
+    <description>
+        This module contains a simple HTTP server. The functionality of the solver is available through a REST interface.
+    </description>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.mainClass>de.hszg.tdvrp.server.App</project.mainClass>
+        <jackson.version>2.9</jackson.version>
+    </properties>
+    
+    <dependencies>     
+        <dependency>
+            <groupId>de.hszg.tdvrp</groupId>
+            <artifactId>tdvrp-core</artifactId>
+        </dependency> 
+        <dependency>
+            <groupId>de.hszg.tdvrp</groupId>
+            <artifactId>tdvrp-instances</artifactId>
+        </dependency>                            
+        <dependency>
+            <groupId>de.hszg.tdvrp</groupId>
+            <artifactId>tdvrp-tdfactories</artifactId>
+        </dependency>    
+        <dependency>
+            <groupId>de.hszg.tdvrp</groupId>
+            <artifactId>tdvrp-solver.dummy</artifactId>
+        </dependency>    
+        <dependency>
+            <groupId>de.hszg.tdvrp</groupId>
+            <artifactId>tdvrp-scheduler.straight</artifactId>
+        </dependency>    
+        
+                        
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-grizzly2-http</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+                
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+      
+                                           
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.0</version>
+        </dependency>    
+                     
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>        
+           
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.3</version>
+                <configuration>
+                    <mainClass>${project.mainClass}</mainClass>                 
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>${project.mainClass}</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <finalName>${project.artifactId}-${project.version}-standalone</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>          
+        </plugins>        
+        
+    </build>
+    
+</project>
