@@ -37,11 +37,12 @@ public class SolomonReader implements InstanceReader {
 
             for (String category : categories) {
                 for (String resource : getResources(category + "/")) {
-
-                    String instanceName = category + "_" + resource.substring(0, resource.indexOf("."));
-                    InputStream in = getClass().getResource(category + "/" + resource).openStream();
-                    result.add(readInstance(instanceName, in));
-
+                    try {
+                        String instanceName = category + "_" + resource.substring(0, resource.indexOf("."));
+                        InputStream in = getClass().getResource(category + "/" + resource).openStream();
+                        result.add(readInstance(instanceName, in));
+                    } catch (Exception e) {
+                    }
                 }
             }
         } catch (IOException ex) {
@@ -148,7 +149,7 @@ public class SolomonReader implements InstanceReader {
 
             String jarPath = dirURL.getPath().substring(5, dirURL.getPath().indexOf("!"));
             String innerPath = dirURL.getPath().substring(dirURL.getPath().indexOf("!") + 2);
-           
+
             JarFile jar = new JarFile(URLDecoder.decode(jarPath, "UTF-8"));
             Enumeration<JarEntry> entries = jar.entries();
             Set<String> result = new HashSet<>();
