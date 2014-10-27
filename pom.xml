@@ -15,11 +15,14 @@
     <modules>
         <module>tdvrp-core</module>
         <module>tdvrp-instances</module>
-        <module>tdvrp-solver.dummy</module>
-        <module>tdvrp-server</module>
         <module>tdvrp-tdfactories</module>
+               
+        <module>tdvrp-solver.dummy</module>      
+ 
         <module>tdvrp-scheduler.straight</module>
+        
         <module>tdvrp-example</module>
+        <module>tdvrp-server</module>
     </modules>
     
     <dependencyManagement>
