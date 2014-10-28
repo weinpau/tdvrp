@@ -92,13 +92,19 @@ public class DummySolver implements Solver {
     private boolean isValid(Instance instance, TDFunction tdFunction, Stack<Customer> route, Customer candidate) {
 
         double time = 0;
+        int remainingCapacity = instance.getVehicleCapacity();
         Numberable position = instance.getDepot();
         for (Customer c : route) {
             time += tdFunction.tavelingTime(position, c, time);
             position = c;
             time = Math.max(c.getReadyTime(), time) + c.getServiceTime();
-
+            remainingCapacity -= c.getDemand();
         }
+
+        if (remainingCapacity - candidate.getDemand() < 0) {
+            return false;
+        }
+
         time += tdFunction.tavelingTime(position, candidate, time);
         time = Math.max(candidate.getReadyTime(), time);
 
