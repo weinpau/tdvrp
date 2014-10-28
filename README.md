@@ -20,7 +20,7 @@ The solution and optimization process is divided into two phases:
 #### Implemented Schedulers ####
 
 
-- [Straight Scheduler](/) - the resulting schedule is directly and is determined without optimizing the traveling time
+- [Straight Scheduler](tdvrp-scheduler.straight/) - the resulting schedule is directly and is determined without optimizing the traveling time
 
 #### Server ####
 
