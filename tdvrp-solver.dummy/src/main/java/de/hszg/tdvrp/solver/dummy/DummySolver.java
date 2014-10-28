@@ -15,8 +15,8 @@ import java.util.Stack;
 import java.util.stream.Collectors;
 
 /**
- * This solver distributed to customers anywhere on the available or specified
- * vehicles, without performing any optimization.
+ * A simple solver, which distributes tasks without optimization on the
+ * available vehicles.
  *
  * @author weinpau
  */
