@@ -5,7 +5,7 @@
     <artifactId>tdvrp</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>Root project of TDRVP solver</name>
+    <name>Root project of TDVRP solver</name>
              
 
     <properties>
