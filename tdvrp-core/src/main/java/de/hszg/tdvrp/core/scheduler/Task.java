@@ -8,13 +8,10 @@ import java.io.Serializable;
  *
  * @author weinpau
  */
-public class Task implements Serializable {
+public class Task {
 
-    private Customer customer;
-    private double arrivalTime, startTime, departureTime;
-
-    private Task() {
-    }
+    private final Customer customer;
+    private final double arrivalTime, startTime, departureTime;
 
     public Task(Customer customer, double arrivalTime, double startTime, double departureTime) {
         this.customer = customer;

@@ -1,13 +1,11 @@
 package de.hszg.tdvrp.core.model;
 
-import java.io.Serializable;
-
 /**
  * This class represents the depot.
  *
  * @author weinpau
  */
-public class Depot implements Numberable, Serializable {
+public class Depot implements Numberable {
 
     private final Position position;
     private final double closingTime;

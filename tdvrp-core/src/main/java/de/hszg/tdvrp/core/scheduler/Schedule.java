@@ -2,22 +2,18 @@ package de.hszg.tdvrp.core.scheduler;
 
 import de.hszg.tdvrp.core.model.Depot;
 import de.hszg.tdvrp.core.model.Instance;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Represents a valid schedule for an instance.
- * 
+ *
  * @author weinpau
  */
-public class Schedule implements Serializable {
+public class Schedule {
 
     private final List<VehicleSchedule> vehicleSchedules = new ArrayList<>();
-    private Instance instance;
-
-    private Schedule() {
-    }
+    private final Instance instance;
 
     public Schedule(Instance instance, List<VehicleSchedule> vehicleSchedules) {
         this.instance = instance;
@@ -26,7 +22,7 @@ public class Schedule implements Serializable {
 
     /**
      * Returns the individual schedules per used vehicle.
-     * 
+     *
      * @return schedules per used vehicle
      */
     public List<VehicleSchedule> getVehicleSchedules() {
@@ -35,7 +31,7 @@ public class Schedule implements Serializable {
 
     /**
      * Returns the associated instance.
-     * 
+     *
      * @return the associated instance
      */
     public Instance getInstance() {

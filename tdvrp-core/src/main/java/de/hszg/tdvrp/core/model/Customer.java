@@ -8,7 +8,7 @@ import java.io.Serializable;
  *
  * @author weinpau
  */
-public class Customer implements Numberable, Serializable {
+public class Customer implements Numberable {
 
     private final int number;
     private final Position position;

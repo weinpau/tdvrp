@@ -1,6 +1,5 @@
 package de.hszg.tdvrp.core.model;
 
-import java.io.Serializable;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
@@ -9,12 +8,9 @@ import static java.lang.Math.sqrt;
  *
  * @author weinpau
  */
-public final class Position implements Serializable {
+public final class Position {
 
-    private double x, y;
-
-    private Position() {
-    }
+    private final double x, y;
 
     public Position(double x, double y) {
         this.x = x;

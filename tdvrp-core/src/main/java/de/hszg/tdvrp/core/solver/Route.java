@@ -1,7 +1,6 @@
 package de.hszg.tdvrp.core.solver;
 
 import de.hszg.tdvrp.core.model.Customer;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,12 +11,9 @@ import java.util.List;
  *
  * @author weinpau
  */
-public final class Route implements Serializable {
+public final class Route {
 
     private final List<Customer> customers = new ArrayList<>();
-
-    private Route() {
-    }
 
     public Route(List<Customer> customers) {
         this.customers.addAll(customers);
