@@ -33,7 +33,7 @@ public class App {
         // search for a solution
         Solution solution = solver.solve(instance, tdFunction).orElse(null);
 
-        if (solution == null) {
+        if (solution == null || !solution.isValid()) {
             System.out.println("No solution found");
             System.exit(0);
         }
@@ -44,7 +44,7 @@ public class App {
         // create a schedule for the solution 
         Schedule schedule = scheduler.schedule(solution).orElse(null);
 
-        if (schedule == null) {
+        if (schedule == null || !schedule.isValid()) {
             System.out.println("No schedule found");
             System.exit(0);
         }
