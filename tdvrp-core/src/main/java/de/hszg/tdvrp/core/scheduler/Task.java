@@ -1,7 +1,6 @@
 package de.hszg.tdvrp.core.scheduler;
 
 import de.hszg.tdvrp.core.model.Customer;
-import java.io.Serializable;
 
 /**
  * Represents a single task for a schedule.
@@ -54,6 +53,19 @@ public class Task {
      */
     public double getDepartureTime() {
         return departureTime;
+    }
+
+    /**
+     * Checks the validity of this task.
+     *
+     * @return {@code true] if this task is valid
+     */
+    public boolean isValid() {
+        Customer c = getCustomer();
+        if (getArrivalTime() > getStartTime() || getDepartureTime() < getStartTime() + c.getServiceTime()) {
+            return false;
+        }
+        return getStartTime() >= c.getReadyTime() && getStartTime() <= c.getDueTime();
     }
 
 }

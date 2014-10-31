@@ -55,7 +55,7 @@ public class Solution {
     /**
      * Checks the validity of this solution.
      *
-     * @return {@code true] if this is valid, else {@code false]
+     * @return {@code true] if this solution is valid
      */
     public boolean isValid() {
         Set<Customer> customers = new HashSet<>(instance.getCustomers());

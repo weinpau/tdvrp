@@ -1,9 +1,12 @@
 package de.hszg.tdvrp.core.scheduler;
 
+import de.hszg.tdvrp.core.model.Customer;
 import de.hszg.tdvrp.core.model.Depot;
 import de.hszg.tdvrp.core.model.Instance;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Represents a valid schedule for an instance.
@@ -75,6 +78,38 @@ public class Schedule {
             }
         }
         return distance;
+    }
+
+    /**
+     * Checks the validity of this schedule.
+     *
+     * @return {@code true] if this schedule is valid
+     */
+    public boolean isValid() {
+        Set<Customer> customers = new HashSet<>(instance.getCustomers());
+
+        for (VehicleSchedule vSchedule : getVehicleSchedules()) {
+
+            if (vSchedule.getDepartureTime() < 0 || vSchedule.getArrivalTime() > instance.getDepot().getClosingTime()) {
+                return false;
+            }
+
+            if (vSchedule.getTasks().stream().
+                    map(t -> t.getCustomer()).
+                    mapToDouble(c -> c.getDemand()).
+                    sum() > instance.getVehicleCapacity()) {
+                return false;
+            }
+
+            for (Task task : vSchedule.getTasks()) {
+                Customer c = task.getCustomer();
+                if (!customers.remove(c) || !task.isValid()) {
+                    return false;
+                }
+            }
+        }
+
+        return customers.isEmpty();
     }
 
 }
