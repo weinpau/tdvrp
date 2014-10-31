@@ -35,13 +35,14 @@ public class SolveResource {
         if (solveRequest.getInstance() == null || solveRequest.getTDFunction() == null) {
             return Response.status(Status.NOT_FOUND).build();
         } else {
-            System.out.printf("SOLVE %s%n",solveRequest.getInstance().getName());
+            System.out.printf("SOLVE %s%n", solveRequest.getInstance().getName());
             Solution solution = createSolution(solveRequest);
-            if (solution == null) {
+            if (solution == null || !solution.isValid()) {
                 return Response.status(Status.NO_CONTENT).build();
             }
             System.out.printf("CREATE SCHEDULE FOR %s%n", solveRequest.getInstance().getName());
             return scheduler.schedule(solution).
+                    filter(s -> s.isValid()).
                     map(s -> Response.ok(s).build()).
                     orElse(Response.status(Status.NO_CONTENT).build());
         }
