@@ -43,6 +43,9 @@ abstract class PeriodicalTDFunctionFactory implements TDFunctionFactory {
                     currentPeriod++;
                     balanceTime = (currentPeriod + 1d) * periodLength - (startTime + travelTime);
                 }
+                if (currentPeriod >= travelSpeeds.length) {
+                    return Double.POSITIVE_INFINITY;
+                }
                 double range = abs(travelSpeeds[currentPeriod] * balanceTime);
 
                 if (range >= residualDistance) {
