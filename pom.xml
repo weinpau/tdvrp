@@ -19,6 +19,7 @@
                
         <module>tdvrp-solver.dummy</module>      
  
+        <module>tdvrp-scheduler.greedy</module>
         <module>tdvrp-scheduler.straight</module>
         
         <module>tdvrp-example</module>
@@ -49,6 +50,12 @@
             <dependency>
                 <groupId>de.hszg.tdvrp</groupId>
                 <artifactId>tdvrp-scheduler.straight</artifactId>
+                <version>${tdvrp.version}</version>
+            </dependency>    
+            
+            <dependency>
+                <groupId>de.hszg.tdvrp</groupId>
+                <artifactId>tdvrp-scheduler.greedy</artifactId>
                 <version>${tdvrp.version}</version>
             </dependency>         
                                    
