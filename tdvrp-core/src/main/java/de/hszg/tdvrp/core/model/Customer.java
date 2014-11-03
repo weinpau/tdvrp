@@ -1,7 +1,5 @@
 package de.hszg.tdvrp.core.model;
 
-import java.io.Serializable;
-
 /**
  * This class represents a customer with a specific location and details on
  * demand and time window of his order.

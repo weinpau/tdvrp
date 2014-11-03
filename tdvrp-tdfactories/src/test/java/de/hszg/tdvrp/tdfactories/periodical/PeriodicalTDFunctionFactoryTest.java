@@ -23,7 +23,7 @@ public class PeriodicalTDFunctionFactoryTest {
         PeriodicalTDFunctionFactory factory = new SamplePeriodicalTDFunctionFactory(new double[]{1});
         TDFunction tdFunction = factory.createTDFunction(sampleInstance);
 
-        assertEquals(sqrt(200), tdFunction.tavelingTime(sampleInstance.getDepot(), customer, 0), 0.001);
+        assertEquals(sqrt(200), tdFunction.tavelTime(sampleInstance.getDepot(), customer, 0), 0.001);
 
     }
 
@@ -33,7 +33,7 @@ public class PeriodicalTDFunctionFactoryTest {
         PeriodicalTDFunctionFactory factory = new SamplePeriodicalTDFunctionFactory(new double[]{1});
         TDFunction tdFunction = factory.createTDFunction(sampleInstance);
 
-        assertEquals(0, tdFunction.tavelingTime(customer, customer, 0), 0.001);
+        assertEquals(0, tdFunction.tavelTime(customer, customer, 0), 0.001);
 
     }
 
@@ -43,7 +43,7 @@ public class PeriodicalTDFunctionFactoryTest {
         PeriodicalTDFunctionFactory factory = new SamplePeriodicalTDFunctionFactory(new double[]{1, 2, 2, 1});
         TDFunction tdFunction = factory.createTDFunction(sampleInstance);
 
-        assertEquals(5 + (sqrt(200) - 5) / 2, tdFunction.tavelingTime(sampleInstance.getDepot(), customer, 0), 0.001);
+        assertEquals(5 + (sqrt(200) - 5) / 2, tdFunction.tavelTime(sampleInstance.getDepot(), customer, 0), 0.001);
 
     }
 
@@ -53,7 +53,7 @@ public class PeriodicalTDFunctionFactoryTest {
         PeriodicalTDFunctionFactory factory = new SamplePeriodicalTDFunctionFactory(new double[]{1, 2, 2, 1});
         TDFunction tdFunction = factory.createTDFunction(sampleInstance);
 
-        assertEquals(0, tdFunction.tavelingTime(customer, customer, 0), 0.001);
+        assertEquals(0, tdFunction.tavelTime(customer, customer, 0), 0.001);
 
     }
 

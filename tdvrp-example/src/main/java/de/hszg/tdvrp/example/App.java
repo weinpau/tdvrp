@@ -52,7 +52,7 @@ public class App {
         System.out.printf("selected solver: %s%n", solver.getName());
         System.out.printf("selected scheduler: %s%n", scheduler.getName());
         System.out.printf("number of vehicles: %d%n", schedule.getVehicleSchedules().size());
-        System.out.printf("traveling time: %f%n", schedule.getTravelingTime());
+        System.out.printf("travel time: %f%n", schedule.getTravelTime());
         System.out.printf("total distance: %f%n", schedule.getTotalDistance());
 
     }

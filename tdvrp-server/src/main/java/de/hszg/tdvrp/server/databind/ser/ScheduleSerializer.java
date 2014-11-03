@@ -22,7 +22,7 @@ public class ScheduleSerializer extends StdSerializer<Schedule> {
     @Override
     public void serialize(Schedule schedule, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonGenerationException {
         jgen.writeStartObject();
-        jgen.writeNumberField("travelingTime", schedule.getTravelingTime());
+        jgen.writeNumberField("travelingTime", schedule.getTravelTime());
         jgen.writeNumberField("totalDistance", schedule.getTotalDistance());
         jgen.writeArrayFieldStart("routes");
         for (VehicleSchedule vSchedule : schedule.getVehicleSchedules()) {

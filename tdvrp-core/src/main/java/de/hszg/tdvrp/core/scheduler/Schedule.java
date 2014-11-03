@@ -42,21 +42,21 @@ public class Schedule {
     }
 
     /**
-     * Returns the total traveling time of this schedule.
+     * Returns the total travel time of this schedule.
      *
      * @return the traveling time
      */
-    public double getTravelingTime() {
-        double travelingTime = 0;
+    public double getTravelTime() {
+        double travelTime = 0;
         for (VehicleSchedule vSchedule : getVehicleSchedules()) {
             double lastDepartureTime = vSchedule.getDepartureTime();
             for (Task task : vSchedule.getTasks()) {
-                travelingTime += task.getArrivalTime() - lastDepartureTime;
+                travelTime += task.getArrivalTime() - lastDepartureTime;
                 lastDepartureTime = task.getDepartureTime();
             }
-            travelingTime += vSchedule.getArrivalTime() - lastDepartureTime;
+            travelTime += vSchedule.getArrivalTime() - lastDepartureTime;
         }
-        return travelingTime;
+        return travelTime;
     }
 
     /**

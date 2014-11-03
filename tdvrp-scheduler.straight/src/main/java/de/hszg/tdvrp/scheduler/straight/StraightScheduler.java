@@ -16,7 +16,7 @@ import java.util.Optional;
 
 /**
  * This scheduler creates a schedule for a solution. The resulting schedule is
- * directly and is determined without optimizing the traveling time.
+ * directly and is determined without optimizing the travel time.
  *
  * @author weinpau
  */
@@ -56,7 +56,7 @@ public class StraightScheduler implements Scheduler {
 
         for (Customer customer : customers) {
 
-            double arrivialTime = tdFunction.tavelingTime(position, customer, time) + time;
+            double arrivialTime = tdFunction.tavelTime(position, customer, time) + time;
             position = customer;
             if (arrivialTime > customer.getDueTime()) {
                 return null;
@@ -66,7 +66,7 @@ public class StraightScheduler implements Scheduler {
             tasks.add(new Task(customer, arrivialTime, startTime, time));
         }
         if (!customers.isEmpty()) {
-            time += tdFunction.tavelingTime(customers.get(customers.size() - 1), depot, time);
+            time += tdFunction.tavelTime(customers.get(customers.size() - 1), depot, time);
         }
         return new VehicleSchedule(0, time, tasks);
     }

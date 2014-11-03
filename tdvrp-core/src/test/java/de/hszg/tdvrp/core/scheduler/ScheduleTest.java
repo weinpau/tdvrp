@@ -34,7 +34,7 @@ public class ScheduleTest {
     @Test
     public void testGetTravelingTime() {
         Schedule schedule = new Schedule(createTestInstance(), createVehicleSchedules());
-        assertEquals(40, schedule.getTravelingTime(), 0.0);
+        assertEquals(40, schedule.getTravelTime(), 0.0);
         
     }
 
@@ -44,7 +44,7 @@ public class ScheduleTest {
     @Test
     public void testGetTravelingTime_empty() {
         Schedule schedule = new Schedule(createTestInstance(), Collections.emptyList());
-        assertEquals(0, schedule.getTravelingTime(), 0.0);
+        assertEquals(0, schedule.getTravelTime(), 0.0);
         
     }
 

@@ -58,7 +58,7 @@ public class StraightSchedulerTest {
         Task task1 = vSchedule.getTasks().get(1);
 
         assertEquals(2 * sqrt(50) + sqrt(200), result.getTotalDistance(), 0.0001d);
-        assertEquals(2 * sqrt(50) + sqrt(200), result.getTravelingTime(), 0.0001d);
+        assertEquals(2 * sqrt(50) + sqrt(200), result.getTravelTime(), 0.0001d);
 
         assertEquals(0, vSchedule.getDepartureTime(), 0.0001d);
         assertEquals(75 + sqrt(200), vSchedule.getArrivalTime(), 0.0001d);

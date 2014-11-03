@@ -4,7 +4,7 @@ import de.hszg.tdvrp.core.model.Numberable;
 
 /**
  * This interface represents a time-dependent function for the calculation of
- * traveling time between two vertices.
+ * travel time between two vertices.
  *
  * @author weinpau
  */
@@ -12,13 +12,13 @@ import de.hszg.tdvrp.core.model.Numberable;
 public interface TDFunction {
 
     /**
-     * Calculates the traveling time between two vertices.
+     * Calculates the travel time between two nodes.
      *
      * @param from
      * @param to
      * @param startTime
-     * @return traveling time between two vertices
+     * @return travel time between two vertices
      */
-    double tavelingTime(Numberable from, Numberable to, double startTime);
+    double tavelTime(Numberable from, Numberable to, double startTime);
 
 }

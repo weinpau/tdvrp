@@ -20,7 +20,7 @@ The solution and optimization process is divided into two phases:
 #### Implemented Schedulers ####
 
 
-- [Straight Scheduler](tdvrp-scheduler.straight/) - the resulting schedule is directly and is determined without optimizing the traveling time
+- [Straight Scheduler](tdvrp-scheduler.straight/) - the resulting schedule is directly and is determined without optimizing the travel time
 
 #### Server ####
 
@@ -66,5 +66,5 @@ The following sample code is also available in the sub-project [tdvrp-example](t
     System.out.printf("selected solver: %s%n", solver.getName());
     System.out.printf("selected scheduler: %s%n", scheduler.getName());
     System.out.printf("number of vehicles: %d%n", schedule.getVehicleSchedules().size());
-    System.out.printf("traveling time: %f%n", schedule.getTravelingTime());
+    System.out.printf("travel time: %f%n", schedule.getTravelTime());
     System.out.printf("total distance: %f%n", schedule.getTotalDistance());
