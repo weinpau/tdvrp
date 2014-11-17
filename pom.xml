@@ -17,8 +17,9 @@
         <module>tdvrp-instances</module>
         <module>tdvrp-tdfactories</module>
                
-        <module>tdvrp-solver.dummy</module>      
- 
+        <module>tdvrp-solver.dummy</module>   
+        <module>tdvrp-solver.ga</module>
+            
         <module>tdvrp-scheduler.greedy</module>
         <module>tdvrp-scheduler.straight</module>
         
