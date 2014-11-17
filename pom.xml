@@ -28,43 +28,6 @@
     
     <dependencyManagement>
         <dependencies>
-            
-            <dependency>
-                <groupId>de.hszg.tdvrp</groupId>
-                <artifactId>tdvrp-core</artifactId>
-                <version>${tdvrp.version}</version>
-            </dependency>     
-            
-            <dependency>
-                <groupId>de.hszg.tdvrp</groupId>
-                <artifactId>tdvrp-instances</artifactId>
-                <version>${tdvrp.version}</version>
-            </dependency>   
-                        
-            <dependency>
-                <groupId>de.hszg.tdvrp</groupId>
-                <artifactId>tdvrp-tdfactories</artifactId>
-                <version>${tdvrp.version}</version>
-            </dependency>     
-            
-            <dependency>
-                <groupId>de.hszg.tdvrp</groupId>
-                <artifactId>tdvrp-scheduler.straight</artifactId>
-                <version>${tdvrp.version}</version>
-            </dependency>    
-            
-            <dependency>
-                <groupId>de.hszg.tdvrp</groupId>
-                <artifactId>tdvrp-scheduler.greedy</artifactId>
-                <version>${tdvrp.version}</version>
-            </dependency>         
-                                   
-            <dependency>
-                <groupId>de.hszg.tdvrp</groupId>
-                <artifactId>tdvrp-solver.dummy</artifactId>
-                <version>${tdvrp.version}</version>
-            </dependency>            
-                
                  
             <dependency>
                 <groupId>junit</groupId>

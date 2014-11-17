@@ -22,24 +22,29 @@
     
     <dependencies>     
         <dependency>
-            <groupId>de.hszg.tdvrp</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>tdvrp-core</artifactId>
+            <version>${project.version}</version>
         </dependency> 
         <dependency>
-            <groupId>de.hszg.tdvrp</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>tdvrp-instances</artifactId>
+            <version>${project.version}</version>
         </dependency>                            
         <dependency>
-            <groupId>de.hszg.tdvrp</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>tdvrp-tdfactories</artifactId>
+            <version>${project.version}</version>
         </dependency>    
         <dependency>
-            <groupId>de.hszg.tdvrp</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>tdvrp-solver.dummy</artifactId>
+            <version>${project.version}</version>
         </dependency>    
         <dependency>
-            <groupId>de.hszg.tdvrp</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>tdvrp-scheduler.straight</artifactId>
+            <version>${project.version}</version>
         </dependency>    
         
                         

@@ -12,8 +12,9 @@
     
     <dependencies>
         <dependency>
-            <groupId>de.hszg.tdvrp</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>tdvrp-core</artifactId>
+            <version>${project.version}</version>
         </dependency>        
      
         <dependency>
