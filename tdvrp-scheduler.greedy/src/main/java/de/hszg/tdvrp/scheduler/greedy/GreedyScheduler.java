@@ -76,7 +76,7 @@ public class GreedyScheduler implements Scheduler {
             double time = minDepartureTime;
 
             while (isAchievable(lastTail, solution, time)) {
-                double tt = solution.getTDFunction().tavelTime(currentPair.getStartingPosition(), currentPair.getTargetPosition(), time);
+                double tt = solution.getTDFunction().travelTime(currentPair.getStartingPosition(), currentPair.getTargetPosition(), time);
                 if (tt < minTravelTime) {
                     minTravelTime = tt;
                     optDepartureTime = time;
@@ -132,7 +132,7 @@ public class GreedyScheduler implements Scheduler {
                 if (p.getDepartureTime().isPresent()) {
                     time = p.getDepartureTime().getAsDouble();
                 }
-                time += tdFunction.tavelTime(p.getStartingPosition(), p.getTargetPosition(), time);
+                time += tdFunction.travelTime(p.getStartingPosition(), p.getTargetPosition(), time);
                 Customer targetCustomer = (Customer) p.getTargetPosition();
                 time = Math.max(targetCustomer.getReadyTime(), time);
                 time += targetCustomer.getServiceTime();
@@ -149,7 +149,7 @@ public class GreedyScheduler implements Scheduler {
         TDFunction tdFunction = solution.getTDFunction();
 
         for (RoutePair p : routePairs) {
-            departureTime = tdFunction.tavelTime(p.getStartingPosition(), p.getTargetPosition(), departureTime);
+            departureTime = tdFunction.travelTime(p.getStartingPosition(), p.getTargetPosition(), departureTime);
             if (p.getDepartureTime().isPresent()) {
                 return departureTime <= p.getDepartureTime().getAsDouble();
             } else if (p.getTargetPosition() instanceof Customer) {
@@ -178,13 +178,13 @@ public class GreedyScheduler implements Scheduler {
 
             if (p.getStartingPosition() instanceof Depot) {
                 departureTime = p.getDepartureTime().getAsDouble();
-                time = departureTime + tdFunction.tavelTime(p.getStartingPosition(), p.getTargetPosition(), departureTime);
+                time = departureTime + tdFunction.travelTime(p.getStartingPosition(), p.getTargetPosition(), departureTime);
             } else {
                 Customer customer = (Customer) p.getStartingPosition();
                 double startTime = Math.max(customer.getReadyTime(), time);
                 double dTime = p.getDepartureTime().getAsDouble();
                 tasks.add(new Task(customer, time, startTime, dTime));
-                time = dTime + tdFunction.tavelTime(p.getStartingPosition(), p.getTargetPosition(), dTime);
+                time = dTime + tdFunction.travelTime(p.getStartingPosition(), p.getTargetPosition(), dTime);
 
             }
 

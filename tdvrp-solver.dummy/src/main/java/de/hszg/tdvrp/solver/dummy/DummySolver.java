@@ -95,7 +95,7 @@ public class DummySolver implements Solver {
         int remainingCapacity = instance.getVehicleCapacity();
         Numberable position = instance.getDepot();
         for (Customer c : route) {
-            time += tdFunction.tavelTime(position, c, time);
+            time += tdFunction.travelTime(position, c, time);
             position = c;
             time = Math.max(c.getReadyTime(), time) + c.getServiceTime();
             remainingCapacity -= c.getDemand();
@@ -105,14 +105,14 @@ public class DummySolver implements Solver {
             return false;
         }
 
-        time += tdFunction.tavelTime(position, candidate, time);
+        time += tdFunction.travelTime(position, candidate, time);
         time = Math.max(candidate.getReadyTime(), time);
 
         if (time > candidate.getDueTime()) {
             return false;
         }
         time += candidate.getServiceTime();
-        time += tdFunction.tavelTime(candidate, instance.getDepot(), time);
+        time += tdFunction.travelTime(candidate, instance.getDepot(), time);
         return time <= instance.getDepot().getClosingTime();
     }
 

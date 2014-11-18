@@ -19,6 +19,6 @@ public interface TDFunction {
      * @param startTime
      * @return travel time between two vertices
      */
-    double tavelTime(Numberable from, Numberable to, double startTime);
+    double travelTime(Numberable from, Numberable to, double startTime);
 
 }
