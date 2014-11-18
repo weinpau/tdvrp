@@ -10,7 +10,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tdvrp.version>1.0.0</tdvrp.version>
     </properties>
     <modules>
         <module>tdvrp-core</module>
