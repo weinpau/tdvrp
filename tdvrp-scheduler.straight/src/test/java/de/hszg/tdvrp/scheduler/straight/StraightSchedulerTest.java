@@ -46,7 +46,7 @@ public class StraightSchedulerTest {
             System.out.println(Arrays.toString(distanceMatrix[i]));
         }
 
-        TDFunction tdFunction = (from, to, time) -> instance.distanceMatrix()[from.getNumber()][to.getNumber()];
+        TDFunction tdFunction = (from, to, time) -> instance.distanceMatrix()[from][to];
 
         Solution solution = new Solution(instance, tdFunction, Collections.singletonList(new Route(customers)));
 

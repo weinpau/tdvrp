@@ -25,7 +25,7 @@ public class DefaultTDFunctionFactory implements TDFunctionFactory {
                 return Double.POSITIVE_INFINITY;
             }
 
-            return distanceMatrix[from.getNumber()][to.getNumber()];
+            return distanceMatrix[from][to];
         };
 
     }

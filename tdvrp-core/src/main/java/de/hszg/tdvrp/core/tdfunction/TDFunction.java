@@ -19,6 +19,18 @@ public interface TDFunction {
      * @param startTime
      * @return travel time between two vertices
      */
-    double travelTime(Numberable from, Numberable to, double startTime);
+    double travelTime(int from, int to, double startTime);
+
+    /**
+     * Calculates the travel time between two nodes.
+     *
+     * @param from
+     * @param to
+     * @param startTime
+     * @return travel time between two vertices
+     */
+    default double travelTime(Numberable from, Numberable to, double startTime) {
+        return travelTime(from.getNumber(), to.getNumber(), startTime);
+    }
 
 }

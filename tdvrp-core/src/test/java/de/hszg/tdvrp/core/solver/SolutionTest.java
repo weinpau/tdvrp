@@ -77,6 +77,6 @@ public class SolutionTest {
         }
     };
 
-    TDFunction tdFunction = (from, to, startTime) -> instance.distanceMatrix()[from.getNumber()][to.getNumber()];
+    TDFunction tdFunction = (from, to, startTime) -> instance.distanceMatrix()[from][to];
 
 }

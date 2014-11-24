@@ -30,7 +30,7 @@ abstract class PeriodicalTDFunctionFactory implements TDFunctionFactory {
             }
             double periodLength = closingTime / travelSpeeds.length;
 
-            double residualDistance = distanceMatrix[from.getNumber()][to.getNumber()];
+            double residualDistance = distanceMatrix[from][to];
             double travelTime = 0d;
 
             while (residualDistance > 0d) {
