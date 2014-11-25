@@ -7,7 +7,7 @@ import java.util.Random;
  *
  * @author weinpau
  */
-public class OXCrossover implements Crossover {
+public class OX implements Crossover {
 
     Random random = new Random();
 

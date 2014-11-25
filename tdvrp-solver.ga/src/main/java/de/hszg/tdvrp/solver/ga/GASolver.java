@@ -22,7 +22,7 @@ public class GASolver implements Solver {
     public static final Splitter SPLITTER = new StraightSplitter();
 
     public static final Mutation MUTATION = new ExchangeMutation();
-    public static final Crossover CROSSOVER = new OXCrossover();
+    public static final Crossover CROSSOVER = new OX();
 
     @Override
     public String getName() {
