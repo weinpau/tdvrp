@@ -11,7 +11,7 @@ import java.util.List;
 public interface Instance {
 
     /**
-     * Returns the name of the instance,
+     * Returns the name of the instance.
      *
      * @return name of instance
      */
