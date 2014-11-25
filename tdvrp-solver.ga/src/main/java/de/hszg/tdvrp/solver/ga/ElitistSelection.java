@@ -14,7 +14,7 @@ public class ElitistSelection implements Selection {
 
     @Override
     public Collection<Chromosome> select(Population population, int selectionSize) {
-     
+
         SortedMap<Double, Chromosome> map = new TreeMap<>();
         population.getChromosomes().forEach(c -> map.put(1d / c.fitness(), c));
         List<Chromosome> selectedPopulation = new ArrayList<>(selectionSize);
