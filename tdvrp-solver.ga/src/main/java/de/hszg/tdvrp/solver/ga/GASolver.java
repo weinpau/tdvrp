@@ -1,13 +1,10 @@
 package de.hszg.tdvrp.solver.ga;
 
-import de.hszg.tdvrp.core.model.Customer;
 import de.hszg.tdvrp.core.model.Instance;
-import de.hszg.tdvrp.core.model.Numberable;
 import de.hszg.tdvrp.core.solver.Solution;
 import de.hszg.tdvrp.core.solver.Solver;
 import de.hszg.tdvrp.core.tdfunction.TDFunction;
 import java.util.Optional;
-import java.util.Stack;
 
 /**
  *
@@ -17,8 +14,16 @@ public class GASolver implements Solver {
 
     public static final int POPULATION_SIZE = 50;
     public static final int MAX_ROUNDS = 500;
-    
-    
+    public static final double MUTATION_PROBABILITY = 0.05;
+    public static final double CROSSOVER_PROBABILITY = 0.10;
+
+    public static final Selection SELECTION = new ElitistSelection();
+    public static final Replacement REPLACEMENT = new ElitistReplacement();
+    public static final Splitter SPLITTER = new StraightSplitter();
+
+    public static final Mutation MUTATION = new ExchangeMutation();
+    public static final Crossover CROSSOVER = new OXCrossover();
+
     @Override
     public String getName() {
         return "GA_SOLVER";
@@ -36,35 +41,7 @@ public class GASolver implements Solver {
             throw new IllegalArgumentException("The number of vehicles must be greater than zero.");
         }
 
-                
         return Optional.empty();
-    }
-
-    private boolean isValid(Instance instance, TDFunction tdFunction, Stack<Customer> route, Customer candidate) {
-
-        double time = 0;
-        int remainingCapacity = instance.getVehicleCapacity();
-        Numberable position = instance.getDepot();
-        for (Customer c : route) {
-            time += tdFunction.travelTime(position, c, time);
-            position = c;
-            time = Math.max(c.getReadyTime(), time) + c.getServiceTime();
-            remainingCapacity -= c.getDemand();
-        }
-
-        if (remainingCapacity - candidate.getDemand() < 0) {
-            return false;
-        }
-
-        time += tdFunction.travelTime(position, candidate, time);
-        time = Math.max(candidate.getReadyTime(), time);
-
-        if (time > candidate.getDueTime()) {
-            return false;
-        }
-        time += candidate.getServiceTime();
-        time += tdFunction.travelTime(candidate, instance.getDepot(), time);
-        return time <= instance.getDepot().getClosingTime();
     }
 
 }

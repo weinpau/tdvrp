@@ -2,11 +2,11 @@ package de.hszg.tdvrp.solver.ga;
 
 import de.hszg.tdvrp.core.model.Customer;
 import de.hszg.tdvrp.core.model.Instance;
-import de.hszg.tdvrp.core.model.Numberable;
 import de.hszg.tdvrp.core.solver.Route;
 import de.hszg.tdvrp.core.tdfunction.TDFunction;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
@@ -16,57 +16,63 @@ public class Chromosome {
 
     Instance instance;
     TDFunction tdFunction;
+    Splitter splitter;
     int[] route;
     int generation;
 
-    Chromosome(Instance instance, TDFunction tdFunction, int[] route, int generation) {
+    Chromosome(Instance instance, TDFunction tdFunction, Splitter splitter, int[] route, int generation) {
         this.instance = instance;
         this.tdFunction = tdFunction;
+        this.splitter = splitter;
         this.route = route;
         this.generation = generation;
     }
 
-    public ChromosomePair cross(Chromosome other) {
-        return new ChromosomePair(this, other);
-    }
-
-    public Chromosome mutate() {
-        return this;
-    }
-
     public double fitness() {
         double totalDuration = 0;
-        for (Route r : routes()) {
+        for (int[] r : splitter.split(this)) {
             totalDuration += assumedTravelTime(r);
         }
         return 1d / totalDuration;
     }
 
-    public Set<Route> routes() {
-        return null;
+    public Collection<Route> routes() {
+        List<Customer> allCustomers = instance.getCustomers();
+        Collection<Route> routes = new ArrayList<>();
+        for (int[] r : splitter.split(this)) {
+            List<Customer> customers = new ArrayList<>();
+            for (int c : r) {
+                customers.add(allCustomers.get(c));
+            }
+            routes.add(new Route(customers));
+        }
+        return routes;
     }
+    
+    
 
     public int getGeneration() {
         return generation;
     }
     
-    
-    
-    
-    double assumedTravelTime(Route route) {
+    public Chromosome copy(int[] route) {
+        return new Chromosome(instance, tdFunction, splitter, route, generation);
+    }
+
+    double assumedTravelTime(int[] route) {
         double departureTime = 0;
         double totalTravelTime = 0;
-        Numberable position = instance.getDepot();
-        List<Customer> customers = route.getCustomers();
-        for (Customer customer : customers) {
-            double travelTime = tdFunction.travelTime(position, customer, departureTime);
+        List<Customer> customers = instance.getCustomers();
+        int position = 0;
+        for (int customer : route) {
+            double travelTime = tdFunction.travelTime(0, customer, departureTime);
             totalTravelTime += travelTime;
             double arrivialTime = departureTime + travelTime;
             position = customer;
-            departureTime = Math.max(arrivialTime, customer.getReadyTime()) + customer.getServiceTime();
+            departureTime = Math.max(arrivialTime, customers.get(position).getReadyTime()) + customers.get(position).getServiceTime();
         }
-        if (!customers.isEmpty()) {
-            totalTravelTime += tdFunction.travelTime(customers.get(customers.size() - 1), instance.getDepot(), departureTime);
+        if (route.length != 0) {
+            totalTravelTime += tdFunction.travelTime(route[route.length - 1], 0, departureTime);
         }
         return totalTravelTime;
     }
