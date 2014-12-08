@@ -60,11 +60,7 @@ public class GASolver implements Solver {
                 if (other == i) {
                     other = (other + 1) % length;
                 }
-                ChromosomePair chromosomePair = selection.get(i).cross(selection.get(other));
-                Chromosome child = chromosomePair.left();
-                if (random.nextInt(2) == 0) {
-                    child = chromosomePair.right();
-                }
+                Chromosome child = selection.get(i).cross(selection.get(other));
 
                 if (random.nextDouble() <= options.mutationProbability()) {
                     child.mutate();

@@ -7,6 +7,7 @@ import de.hszg.tdvrp.core.tdfunction.TDFunction;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -20,6 +21,8 @@ public class Chromosome {
     int[] route;
     int generation;
     double fitness = -1;
+
+    static Random random = new Random();
 
     Chromosome(Instance instance, TDFunction tdFunction, GAOptions options, int[] route, int generation) {
         this.instance = instance;
@@ -36,7 +39,7 @@ public class Chromosome {
             for (int[] r : subRoutes) {
                 totalDuration += assumedTravelTime(r);
             }
-            fitness = 1d / ((subRoutes.size() - 1) * instance.getDepot().getClosingTime() + totalDuration);
+            fitness = 1d / (subRoutes.size() + totalDuration / instance.getDepot().getClosingTime());
         }
         return fitness;
     }
@@ -54,13 +57,20 @@ public class Chromosome {
         return routes;
     }
 
-    public ChromosomePair cross(Chromosome other) {
-        return options.crossover().cross(this, other);
+    public Chromosome cross(Chromosome other) {
+        int crossover = random.nextInt(options.crossovers().length);
+        ChromosomePair pair = options.crossovers()[crossover].cross(this, other);
+        if (pair.left().fitness() > pair.right().fitness()) {
+            return pair.left();
+        } else {
+            return pair.right();
+        }
     }
 
     public void mutate() {
+        int mutation = random.nextInt(options.mutations().length);
+        options.mutations()[mutation].mutate(this);
         fitness = -1;
-        options.mutation().mutate(this);
     }
 
     public int generation() {

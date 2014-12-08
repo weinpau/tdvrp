@@ -8,16 +8,16 @@ public final class GAOptions {
 
     private int populationSize = 30;
 
-    private int maxRounds = 10000;
+    private int maxRounds = 2000;
     private double selectionRate = .5;
-    private double mutationProbability = 0.00;
+    private double mutationProbability = 0.3;
 
-    private Selection selection = new ElitistSelection();
+    private Selection selection = new RouletteSelection();
     private Replacement replacement = new ElitistReplacement();
     private Splitter splitter = new TravelTimeMinimizingSplitter();
 
-    private Mutation mutation = new ExchangeMutation();
-    private Crossover crossover = new OX();
+    private Mutation[] mutations = new Mutation[]{new LocalSearchMutation(), new ExchangeMutation()};
+    private Crossover[] crossovers = new Crossover[]{new OX()};
 
     public int populationSize() {
         return populationSize;
@@ -47,12 +47,12 @@ public final class GAOptions {
         return splitter;
     }
 
-    public Mutation mutation() {
-        return mutation;
+    public Mutation[] mutations() {
+        return mutations;
     }
 
-    public Crossover crossover() {
-        return crossover;
+    public Crossover[] crossovers() {
+        return crossovers;
     }
 
     public GAOptions populationSize(int populationSize) {
@@ -90,13 +90,13 @@ public final class GAOptions {
         return this;
     }
 
-    public GAOptions mutation(Mutation mutation) {
-        this.mutation = mutation;
+    public GAOptions mutations(Mutation... mutations) {
+        this.mutations = mutations;
         return this;
     }
 
-    public GAOptions crossover(Crossover crossover) {
-        this.crossover = crossover;
+    public GAOptions crossovers(Crossover... crossovers) {
+        this.crossovers = crossovers;
         return this;
     }
 
