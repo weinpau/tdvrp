@@ -39,11 +39,12 @@ public class GASolver implements Solver {
         }
 
         Population population = createPopulation(instance, tdFunction, options.populationSize());
-
-        int round = options.maxRounds();
         Chromosome bestEver = null;
+        int round = options.maxRounds();
+        int roundsSinceLastImprovement = 0;
+        double bestPopulationFitness = Double.NEGATIVE_INFINITY;
 
-        while (round-- > 0) {
+        while (round-- > 0 && roundsSinceLastImprovement < options.maxRoundsWithoutImproving()) {
             List<Chromosome> children = new ArrayList<>();
             List<Chromosome> selection = options.selection().
                     select(population, (int) (options.selectionRate() * population.getChromosomes().size())).
@@ -73,10 +74,21 @@ public class GASolver implements Solver {
             population = options.replacement().replace(population, children);
 
             Chromosome best = population.getBestChromosome().orElse(null);
+
+            double populationFitness = population.getChromosomes().stream().mapToDouble(c -> c.fitness()).sum();
+
             if (best != null && (bestEver == null || bestEver.fitness() < best.fitness())) {
-                System.out.println("updated best chromosome in round " + round + " to " + best.fitness + " " + population.getChromosomes().size());
+                System.out.println("updated best chromosome in round " + (options.maxRounds() - round) + " to " + best.fitness + " " + population.getChromosomes().size());
                 bestEver = best;
             }
+
+            if (populationFitness > bestPopulationFitness) {
+                bestPopulationFitness = populationFitness;
+                roundsSinceLastImprovement = 0;
+            } else {
+                roundsSinceLastImprovement++;
+            }
+
         }
 
         if (bestEver == null) {

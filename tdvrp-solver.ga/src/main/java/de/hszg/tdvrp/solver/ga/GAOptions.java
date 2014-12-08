@@ -8,7 +8,8 @@ public final class GAOptions {
 
     private int populationSize = 30;
 
-    private int maxRounds = 2000;
+    private int maxRounds = 20000;
+    private int maxRoundsWithoutImproving = 50;
     private double selectionRate = .5;
     private double mutationProbability = 0.3;
 
@@ -25,6 +26,10 @@ public final class GAOptions {
 
     public int maxRounds() {
         return maxRounds;
+    }
+
+    public int maxRoundsWithoutImproving() {
+        return maxRoundsWithoutImproving;
     }
 
     public double mutationProbability() {
@@ -62,6 +67,11 @@ public final class GAOptions {
 
     public GAOptions maxRounds(int maxRounds) {
         this.maxRounds = maxRounds;
+        return this;
+    }
+
+    public GAOptions maxRoundsWithoutImproving(int maxRoundsWithoutImproving) {
+        this.maxRoundsWithoutImproving = maxRoundsWithoutImproving;
         return this;
     }
 
