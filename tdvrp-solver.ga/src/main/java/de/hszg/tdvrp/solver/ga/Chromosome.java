@@ -44,6 +44,17 @@ public class Chromosome {
         return fitness;
     }
 
+    public int hammingDistance(Chromosome other) {
+        int distance = 0;
+        for (int i = 0; i < route.length; i++) {
+            if (route[i] != other.route[i]) {
+                distance++;
+            }
+        }
+        return distance;
+
+    }
+
     public Collection<Route> routes(Splitter splitter) {
         List<Customer> allCustomers = instance.getCustomers();
         Collection<Route> routes = new ArrayList<>();

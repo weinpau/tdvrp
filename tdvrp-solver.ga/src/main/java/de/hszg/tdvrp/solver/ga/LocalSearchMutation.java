@@ -18,10 +18,13 @@ public class LocalSearchMutation implements Mutation {
 
         int sA = random.nextInt(length);
         int sB = random.nextInt(length);
-
-        for (int i = 0; i < length; i++) {
+        
+        int rangeA = Math.min(random.nextInt(10),length);
+        int rangeB = Math.min(random.nextInt(10),length);
+        
+        for (int i = 0; i < rangeA; i++) {
             int iA = (sA + i) % length;
-            for (int j = 0; j < length; j++) {
+            for (int j = 0; j < rangeB; j++) {
                 int iB = (sB + j) % length;
 
                 mutated = best.copy(best.route);

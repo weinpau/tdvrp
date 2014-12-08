@@ -38,7 +38,7 @@ public class GASolver implements Solver {
             throw new IllegalArgumentException("The number of vehicles must be greater than zero.");
         }
 
-        Population population = createPopulation(instance, tdFunction, options.populationSize());
+        Population population = PopulationCreator.createPopulation(instance, tdFunction, options);
         Chromosome bestEver = null;
         int round = options.maxRounds();
         int roundsSinceLastImprovement = 0;
@@ -62,7 +62,7 @@ public class GASolver implements Solver {
                     other = (other + 1) % length;
                 }
                 Chromosome child = selection.get(i).cross(selection.get(other));
-
+              
                 if (random.nextDouble() <= options.mutationProbability()) {
                     child.mutate();
                 }
@@ -85,6 +85,8 @@ public class GASolver implements Solver {
             if (populationFitness > bestPopulationFitness) {
                 bestPopulationFitness = populationFitness;
                 roundsSinceLastImprovement = 0;
+                   System.out.println("updated population fitness in round " + (options.maxRounds() - round) + " to " + bestPopulationFitness);
+
             } else {
                 roundsSinceLastImprovement++;
             }
@@ -99,15 +101,7 @@ public class GASolver implements Solver {
 
     }
 
-    Population createPopulation(Instance instance, TDFunction tdFunction, int size) {
-        Collection<Chromosome> chromosomes = new ArrayList<>();
-        int length = instance.getCustomers().size();
-        for (int i = 0; i < size; i++) {
-            chromosomes.add(new Chromosome(instance, tdFunction, options, createRoute(length), 1));
-        }
-        return new Population(chromosomes);
 
-    }
 
     private int[] createRoute(int length) {
         int[] route = new int[length];
