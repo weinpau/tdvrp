@@ -41,10 +41,10 @@ public class Chromosome {
         return fitness;
     }
 
-    public Collection<Route> routes() {
+    public Collection<Route> routes(Splitter splitter) {
         List<Customer> allCustomers = instance.getCustomers();
         Collection<Route> routes = new ArrayList<>();
-        for (int[] r : options.splitter().split(this)) {
+        for (int[] r : splitter.split(this)) {
             List<Customer> customers = new ArrayList<>();
             for (int c : r) {
                 customers.add(allCustomers.get(c - 1));

@@ -44,39 +44,41 @@ public class GASolver implements Solver {
         Chromosome bestEver = null;
 
         while (round-- > 0) {
-
-            List<Chromosome> children = options.selection().
+            List<Chromosome> children = new ArrayList<>();
+            List<Chromosome> selection = options.selection().
                     select(population, (int) (options.selectionRate() * population.getChromosomes().size())).
                     stream().
                     map(c -> c.child()).
                     collect(Collectors.toList());
 
-            int length = children.size();
+            int length = selection.size();
 
             for (int i = 0; i < length; i++) {
 
-                if (random.nextDouble() <= options.crossoverProbability()) {
-                    int other = random.nextInt(length);
+                int other = random.nextInt(length);
 
-                    if (other == i) {
-                        other = (other + 1) % length;
-                    }
-                    ChromosomePair chromosomePair = children.get(i).cross(children.get(other));
-                    children.add(chromosomePair.left());
-                    children.add(chromosomePair.right());
-
+                if (other == i) {
+                    other = (other + 1) % length;
                 }
+                ChromosomePair chromosomePair = selection.get(i).cross(selection.get(other));
+                Chromosome child = chromosomePair.left();
+                if (random.nextInt(2) == 0) {
+                    child = chromosomePair.right();
+                }
+
                 if (random.nextDouble() <= options.mutationProbability()) {
-                    children.get(i).mutate();
+                    child.mutate();
                 }
+
+                children.add(child);
 
             }
 
             population = options.replacement().replace(population, children);
-            
+
             Chromosome best = population.getBestChromosome().orElse(null);
             if (best != null && (bestEver == null || bestEver.fitness() < best.fitness())) {
-                System.out.println("updated best chromosome in round " + round + " to " + best.fitness);
+                System.out.println("updated best chromosome in round " + round + " to " + best.fitness + " " + population.getChromosomes().size());
                 bestEver = best;
             }
         }
@@ -84,7 +86,7 @@ public class GASolver implements Solver {
         if (bestEver == null) {
             return Optional.empty();
         } else {
-            return Optional.of(new Solution(instance, tdFunction, bestEver.routes()));
+            return Optional.of(new Solution(instance, tdFunction, bestEver.routes(new VehicleMinimizingSplitter())));
         }
 
     }

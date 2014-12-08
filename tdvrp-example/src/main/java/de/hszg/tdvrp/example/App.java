@@ -21,7 +21,7 @@ public class App {
     public static void main(String[] args) {
 
         // load the instance
-        Instance instance = Instances.getInstanceByName("100_C101").get();
+        Instance instance = Instances.getInstanceByName("025_C101").get();
 
         // create the time-dependent function
         TDFunctionFactory tdFunctionFactory = TDFunctionFactories.getFactoryByName("DEFAULT").get();

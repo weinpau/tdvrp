@@ -6,16 +6,15 @@ package de.hszg.tdvrp.solver.ga;
  */
 public final class GAOptions {
 
-    private int populationSize = 50;
+    private int populationSize = 30;
 
-    private int maxRounds = 1000;
-    private double selectionRate = .3;
-    private double mutationProbability = 0.1;
-    private double crossoverProbability = 0.20;
+    private int maxRounds = 10000;
+    private double selectionRate = .5;
+    private double mutationProbability = 0.00;
 
     private Selection selection = new ElitistSelection();
     private Replacement replacement = new ElitistReplacement();
-    private Splitter splitter = new StraightSplitter();
+    private Splitter splitter = new TravelTimeMinimizingSplitter();
 
     private Mutation mutation = new ExchangeMutation();
     private Crossover crossover = new OX();
@@ -30,10 +29,6 @@ public final class GAOptions {
 
     public double mutationProbability() {
         return mutationProbability;
-    }
-
-    public double crossoverProbability() {
-        return crossoverProbability;
     }
 
     public Selection selection() {
@@ -72,11 +67,6 @@ public final class GAOptions {
 
     public GAOptions mutationProbability(double mutationProbability) {
         this.mutationProbability = mutationProbability;
-        return this;
-    }
-
-    public GAOptions crossoverProbability(double crossoverProbability) {
-        this.crossoverProbability = crossoverProbability;
         return this;
     }
 
