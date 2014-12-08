@@ -17,7 +17,7 @@ public final class GAOptions {
     private Splitter splitter = new TravelTimeMinimizingSplitter();
 
     private Mutation[] mutations = new Mutation[]{new LocalSearchMutation(), new ExchangeMutation()};
-    private Crossover[] crossovers = new Crossover[]{new OX()};
+    private Crossover[] crossovers = new Crossover[]{new OX(), new CX()};
 
     public int populationSize() {
         return populationSize;

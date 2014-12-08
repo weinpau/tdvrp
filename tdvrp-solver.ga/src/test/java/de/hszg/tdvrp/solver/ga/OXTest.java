@@ -17,7 +17,6 @@ public class OXTest {
      */
     @Test
     public void testCross() {
-        System.out.println("cross");
         Chromosome p1 = new Chromosome(null, null, null, new int[]{1, 3, 2, 6, 4, 5, 9, 7, 8}, 0);
         Chromosome p2 = new Chromosome(null, null, null, new int[]{3, 7, 8, 1, 4, 9, 2, 5, 6}, 0);
         OX instance = new OX();
