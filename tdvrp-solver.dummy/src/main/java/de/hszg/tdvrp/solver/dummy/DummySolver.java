@@ -29,7 +29,23 @@ public class DummySolver implements Solver {
 
     @Override
     public Optional<Solution> solve(Instance instance, TDFunction tdFunction) {
-        return solve(instance, tdFunction, instance.getAvailableVehicles());
+
+        int v = instance.getAvailableVehicles();
+
+        Optional<Solution> result = solve(instance, tdFunction, v);
+
+        Optional<Solution> next = result;
+        while (next.isPresent()) {
+            next = solve(instance, tdFunction, v);
+
+            if (next.isPresent()) {
+                result = next;
+                v--;
+            } else {
+                break;
+            }
+        }
+        return result;
 
     }
 
