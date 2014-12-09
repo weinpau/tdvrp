@@ -21,7 +21,7 @@ public final class GAOptions {
 
     private int populationSize = 30;
 
-    private int maxRounds = 20000;
+    private int maxRounds = 50000;
     private int maxRoundsWithoutImproving = 500;
     private double selectionRate = .5;
     private double mutationProbability = 0.3;
