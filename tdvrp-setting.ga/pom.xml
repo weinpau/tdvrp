@@ -21,7 +21,7 @@
         </dependency>       
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>tdvrp-instances</artifactId>
+            <artifactId>tdvrp-benchmark</artifactId>
             <version>${project.version}</version>
         </dependency>                                
         <dependency>
@@ -37,6 +37,11 @@
         <dependency>       
             <groupId>${project.groupId}</groupId>
             <artifactId>tdvrp-solver.ga</artifactId>
+            <version>${project.version}</version>
+        </dependency>  
+        <dependency>       
+            <groupId>${project.groupId}</groupId>
+            <artifactId>tdvrp-solver.dummy</artifactId>
             <version>${project.version}</version>
         </dependency>         
                   

@@ -92,8 +92,6 @@ public class GASolver implements Solver {
             if (populationFitness > bestPopulationFitness) {
                 bestPopulationFitness = populationFitness;
                 roundsSinceLastImprovement = 0;
-                System.out.println("updated population fitness in round " + (options.maxRounds() - round) + " to " + bestPopulationFitness);
-
             } else {
                 roundsSinceLastImprovement++;
             }

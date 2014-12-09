@@ -25,6 +25,7 @@
         <module>tdvrp-example</module>
         <module>tdvrp-server</module>
         <module>tdvrp-setting.ga</module>
+        <module>tdvrp-benchmark</module>
     </modules>
     
     <dependencyManagement>
