@@ -15,14 +15,16 @@ The solution and optimization process is divided into two phases:
 ### Features ###
 
 
-#### Implemented Solvers ####
+#### Implemented solvers ####
 
-- [Dummy Solver](tdvrp-solver.dummy/) - a simple solver, which distributes tasks without optimization on the available vehicles
+- [Constructive solver](tdvrp-solver.dummy/) - a constructive solver, which distributes tasks without travel time optimization
+- [GA solver](tdvrp-solver.ga/) - a genetic solver algorithm
 
-#### Implemented Schedulers ####
+#### Implemented schedulers ####
 
 
-- [Straight Scheduler](tdvrp-scheduler.straight/) - the resulting schedule is directly and is determined without optimizing the travel time
+- [Straight scheduler](tdvrp-scheduler.straight/) - the resulting schedule is directly and is determined without optimizing the travel time
+- [Greedy scheduler](tdvrp-scheduler.greedy/) - a greedy-heuristic scheduler
 
 #### Server ####
 
@@ -46,7 +48,7 @@ The following sample code is also available in the sub-project [tdvrp-example](t
     TDFunction tdFunction = tdFunctionFactory.createTDFunction(instance);
 
     // instantiate the solver
-    Solver solver = new DummySolver();
+    Solver solver = new GASolver();
 
     // search for a solution
     Solution solution = solver.solve(instance, tdFunction).orElse(null);
