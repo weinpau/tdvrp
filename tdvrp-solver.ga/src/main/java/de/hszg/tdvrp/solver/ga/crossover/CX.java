@@ -1,5 +1,7 @@
-package de.hszg.tdvrp.solver.ga;
+package de.hszg.tdvrp.solver.ga.crossover;
 
+import de.hszg.tdvrp.solver.ga.Chromosome;
+import de.hszg.tdvrp.solver.ga.ChromosomePair;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -16,16 +18,16 @@ public class CX implements Crossover {
 
     @Override
     public ChromosomePair cross(Chromosome p1, Chromosome p2) {
-        int length = p1.route.length;
+        int length = p1.route().length;
         return cross(p1, p2, random.nextInt(length));
     }
 
     ChromosomePair cross(Chromosome p1, Chromosome p2, int idx) {
 
-        int length = p1.route.length;
+        int length = p1.route().length;
 
-        int[] parent1Rep = p1.route;
-        int[] parent2Rep = p2.route;
+        int[] parent1Rep = p1.route();
+        int[] parent2Rep = p2.route();
         int[] child1Rep = new int[length];
         int[] child2Rep = new int[length];
         System.arraycopy(parent1Rep, 0, child1Rep, 0, length);

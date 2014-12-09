@@ -1,11 +1,11 @@
 package de.hszg.tdvrp.solver.ga;
 
+import de.hszg.tdvrp.solver.ga.splitter.VehicleMinimizingSplitter;
 import de.hszg.tdvrp.core.model.Instance;
 import de.hszg.tdvrp.core.solver.Solution;
 import de.hszg.tdvrp.core.solver.Solver;
 import de.hszg.tdvrp.core.tdfunction.TDFunction;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -20,6 +20,13 @@ public class GASolver implements Solver {
     Random random = new Random();
 
     GAOptions options = new GAOptions();
+
+    public GASolver() {
+    }
+
+    public GASolver(GAOptions options) {
+        this.options = options;
+    }
 
     @Override
     public String getName() {
@@ -62,7 +69,7 @@ public class GASolver implements Solver {
                     other = (other + 1) % length;
                 }
                 Chromosome child = selection.get(i).cross(selection.get(other));
-              
+
                 if (random.nextDouble() <= options.mutationProbability()) {
                     child.mutate();
                 }
@@ -85,7 +92,7 @@ public class GASolver implements Solver {
             if (populationFitness > bestPopulationFitness) {
                 bestPopulationFitness = populationFitness;
                 roundsSinceLastImprovement = 0;
-                   System.out.println("updated population fitness in round " + (options.maxRounds() - round) + " to " + bestPopulationFitness);
+                System.out.println("updated population fitness in round " + (options.maxRounds() - round) + " to " + bestPopulationFitness);
 
             } else {
                 roundsSinceLastImprovement++;
@@ -100,8 +107,6 @@ public class GASolver implements Solver {
         }
 
     }
-
-
 
     private int[] createRoute(int length) {
         int[] route = new int[length];

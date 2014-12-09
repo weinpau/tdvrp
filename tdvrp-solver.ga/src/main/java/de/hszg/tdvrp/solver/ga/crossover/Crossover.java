@@ -1,4 +1,7 @@
-package de.hszg.tdvrp.solver.ga;
+package de.hszg.tdvrp.solver.ga.crossover;
+
+import de.hszg.tdvrp.solver.ga.Chromosome;
+import de.hszg.tdvrp.solver.ga.ChromosomePair;
 
 /**
  *

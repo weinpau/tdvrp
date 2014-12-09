@@ -1,5 +1,6 @@
-package de.hszg.tdvrp.solver.ga;
+package de.hszg.tdvrp.solver.ga.splitter;
 
+import de.hszg.tdvrp.solver.ga.Chromosome;
 import java.util.Collection;
 
 /**

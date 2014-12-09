@@ -1,5 +1,6 @@
 package de.hszg.tdvrp.solver.ga;
 
+import de.hszg.tdvrp.solver.ga.splitter.Splitter;
 import de.hszg.tdvrp.core.model.Customer;
 import de.hszg.tdvrp.core.model.Instance;
 import de.hszg.tdvrp.core.solver.Route;
@@ -24,7 +25,7 @@ public class Chromosome {
 
     static Random random = new Random();
 
-    Chromosome(Instance instance, TDFunction tdFunction, GAOptions options, int[] route, int generation) {
+    public Chromosome(Instance instance, TDFunction tdFunction, GAOptions options, int[] route, int generation) {
         this.instance = instance;
         this.tdFunction = tdFunction;
         this.options = options;
@@ -53,6 +54,23 @@ public class Chromosome {
         }
         return distance;
 
+    }
+
+    public Instance instance() {
+        return instance;
+    }
+
+    public TDFunction tdFunction() {
+        return tdFunction;
+    }
+        
+
+    public int[] route() {
+        return route;
+    }
+
+    public void route(int[] route) {
+        this.route = route;
     }
 
     public Collection<Route> routes(Splitter splitter) {

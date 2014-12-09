@@ -1,4 +1,6 @@
-package de.hszg.tdvrp.solver.ga;
+package de.hszg.tdvrp.solver.ga.mutation;
+
+import de.hszg.tdvrp.solver.ga.Chromosome;
 
 /**
  *

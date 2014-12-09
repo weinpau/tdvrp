@@ -1,5 +1,8 @@
-package de.hszg.tdvrp.solver.ga;
+package de.hszg.tdvrp.solver.ga.replacement;
 
+import de.hszg.tdvrp.solver.ga.Chromosome;
+import de.hszg.tdvrp.solver.ga.Population;
+import de.hszg.tdvrp.solver.ga.selection.ElitistSelection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

@@ -1,4 +1,4 @@
-package de.hszg.tdvrp.solver.ga;
+package de.hszg.tdvrp.solver.ga.splitter;
 
 import java.util.ArrayList;
 import java.util.Arrays;

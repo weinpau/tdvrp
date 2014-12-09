@@ -1,5 +1,7 @@
-package de.hszg.tdvrp.solver.ga;
+package de.hszg.tdvrp.solver.ga.crossover;
 
+import de.hszg.tdvrp.solver.ga.Chromosome;
+import de.hszg.tdvrp.solver.ga.ChromosomePair;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -23,8 +25,8 @@ public class OXTest {
 
         ChromosomePair result = instance.cross(p1, p2, 3, 5);
 
-        int[] c1 = result.left().route;
-        int[] c2 = result.right().route;
+        int[] c1 = result.left().route();
+        int[] c2 = result.right().route();
 
         assertArrayEquals(new int[]{8, 1, 9, 6, 4, 5, 2, 3, 7}, c1);
         assertArrayEquals(new int[]{2, 6, 5, 1, 4, 9, 7, 8, 3}, c2);

@@ -1,5 +1,6 @@
-package de.hszg.tdvrp.solver.ga;
+package de.hszg.tdvrp.solver.ga.mutation;
 
+import de.hszg.tdvrp.solver.ga.Chromosome;
 import java.util.Random;
 
 /**
@@ -14,24 +15,25 @@ public class LocalSearchMutation implements Mutation {
     public void mutate(Chromosome chromosome) {
         Chromosome mutated;
         Chromosome best = chromosome;
-        int length = best.route.length;
+        int length = best.route().length;
 
         int sA = random.nextInt(length);
         int sB = random.nextInt(length);
-        
-        int rangeA = Math.min(random.nextInt(10),length);
-        int rangeB = Math.min(random.nextInt(10),length);
-        
+
+        int rangeA = Math.min(random.nextInt(10), length);
+        int rangeB = Math.min(random.nextInt(10), length);
+
         for (int i = 0; i < rangeA; i++) {
             int iA = (sA + i) % length;
             for (int j = 0; j < rangeB; j++) {
                 int iB = (sB + j) % length;
 
-                mutated = best.copy(best.route);
+                mutated = best.copy(best.route());
+                int[] mutatedRoute = mutated.route();
 
-                int a = mutated.route[iA];
-                mutated.route[iA] = mutated.route[iB];
-                mutated.route[iB] = a;
+                int tmp = mutatedRoute[iA];
+                mutatedRoute[iA] = mutatedRoute[iB];
+                mutatedRoute[iB] = tmp;
 
                 if (mutated.fitness() > best.fitness()) {
                     best = mutated;
@@ -40,7 +42,7 @@ public class LocalSearchMutation implements Mutation {
             }
         }
         if (chromosome.fitness() < best.fitness()) {
-            chromosome.route = best.route;
+            chromosome.route(best.route());
         }
 
     }
