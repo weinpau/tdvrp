@@ -1,5 +1,7 @@
 package de.hszg.tdvrp.solver.ga.splitter;
 
+import gnu.trove.TDoubleArrayList;
+import gnu.trove.TIntArrayList;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -12,10 +14,10 @@ import java.util.List;
 public class VehicleMinimizingSplitter extends DPSplitter {
 
     @Override
-    Collection<int[]> shortestPath(int[] route, List<List<Double>> travelTimes) {
+    Collection<int[]> shortestPath(int[] route, List<TDoubleArrayList> travelTimes) {
         int size = travelTimes.size();
 
-        List<List<Integer>> leapAncestors = initLeapAncestors(size);
+        List<TIntArrayList> leapAncestors = initLeapAncestors(size);
         int[] piLeaps = initPiLeaps(size);
         double[] piTravelTimes = initPiTravelTimes(size);
         for (int i = 0; i < size - 1; i++) {
@@ -71,10 +73,10 @@ public class VehicleMinimizingSplitter extends DPSplitter {
         return piTravelTimes;
     }
 
-    List<List<Integer>> initLeapAncestors(int size) {
-        List<List<Integer>> result = new ArrayList<>(size);
+    List<TIntArrayList> initLeapAncestors(int size) {
+        List<TIntArrayList> result = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
-            result.add(new ArrayList<>());
+            result.add(new TIntArrayList());
         }
         return result;
     }

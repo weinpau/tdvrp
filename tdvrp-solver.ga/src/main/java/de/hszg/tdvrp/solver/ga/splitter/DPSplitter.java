@@ -4,6 +4,7 @@ import de.hszg.tdvrp.core.model.Customer;
 import de.hszg.tdvrp.core.model.Instance;
 import de.hszg.tdvrp.core.tdfunction.TDFunction;
 import de.hszg.tdvrp.solver.ga.Chromosome;
+import gnu.trove.TDoubleArrayList;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -17,24 +18,24 @@ abstract class DPSplitter implements Splitter {
 
     @Override
     public Collection<int[]> split(Chromosome chromosome) {
-        List<List<Double>> travelTimes = calculateTravelTimes(chromosome);
+        List<TDoubleArrayList> travelTimes = calculateTravelTimes(chromosome);
         return shortestPath(chromosome.route(), travelTimes);
     }
 
-    abstract Collection<int[]> shortestPath(int[] route, List<List<Double>> travelTimes);
+    abstract Collection<int[]> shortestPath(int[] route, List<TDoubleArrayList> travelTimes);
 
-    List<List<Double>> calculateTravelTimes(Chromosome chromosome) {
+    List<TDoubleArrayList> calculateTravelTimes(Chromosome chromosome) {
         List<Customer> customers = chromosome.instance().getCustomers();
-        List<List<Double>> result = new ArrayList<>(customers.size());
+        List<TDoubleArrayList> result = new ArrayList<>(customers.size());
         for (int i = 0; i < customers.size(); i++) {
             result.add(calculateSubroute(chromosome, i));
         }
-        result.add(Collections.emptyList());
+        result.add(new TDoubleArrayList());
         return result;
     }
 
-    List<Double> calculateSubroute(Chromosome chromosome, int from) {
-        ArrayList<Double> result = new ArrayList<>();
+    TDoubleArrayList calculateSubroute(Chromosome chromosome, int from) {
+        TDoubleArrayList result = new TDoubleArrayList();
         Instance instance = chromosome.instance();
 
         List<Customer> customers = instance.getCustomers();
@@ -62,7 +63,6 @@ abstract class DPSplitter implements Splitter {
                 break;
             }
         }
-
         return result;
     }
 

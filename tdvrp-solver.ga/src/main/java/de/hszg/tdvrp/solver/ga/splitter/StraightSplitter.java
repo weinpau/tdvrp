@@ -22,18 +22,17 @@ public class StraightSplitter implements Splitter {
         List<Customer> customers = instance.getCustomers();
         int[] r = chromosome.route();
         double closingTime = instance.getDepot().getClosingTime();
+        TDFunction tdFunction = chromosome.tdFunction();
+        int capacity = instance.getVehicleCapacity();
 
         int from = 0;
         while (from < customers.size()) {
 
             int to = from;
-            int capacity = instance.getVehicleCapacity();
             double time = 0;
-            TDFunction tdFunction = chromosome.tdFunction();
             for (int i = from; i < customers.size(); i++) {
 
                 time += tdFunction.travelTime(i - from == 0 ? 0 : r[i - 1], r[i], time);
-
                 Customer c = customers.get(r[i] - 1);
                 double startTime = Math.max(c.getReadyTime(), time);
                 double departureTime = startTime + c.getServiceTime();

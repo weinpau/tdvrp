@@ -63,7 +63,6 @@ public class Chromosome {
     public TDFunction tdFunction() {
         return tdFunction;
     }
-        
 
     public int[] route() {
         return route;

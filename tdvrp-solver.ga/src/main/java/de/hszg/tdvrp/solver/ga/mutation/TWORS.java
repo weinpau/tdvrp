@@ -7,7 +7,7 @@ import java.util.Random;
  *
  * @author weinpau
  */
-public class ExchangeMutation implements Mutation {
+public class TWORS implements Mutation {
 
     Random random = new Random();
 
@@ -17,6 +17,10 @@ public class ExchangeMutation implements Mutation {
 
         int iA = random.nextInt(length);
         int iB = random.nextInt(length);
+        if (iA == iB) {
+            iB = (iB + 1) % length;
+        }
+
         int[] route = chromosome.route();
 
         int tmp = route[iA];

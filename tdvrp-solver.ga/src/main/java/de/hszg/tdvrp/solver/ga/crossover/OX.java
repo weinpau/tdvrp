@@ -18,6 +18,9 @@ public class OX implements Crossover {
         int length = p1.route().length;
         int rA = random.nextInt(length);
         int rB = random.nextInt(length);
+        if (rA == rB) {
+            rB = (rB + 1) % length;
+        }
         return cross(p1, p2, rA, rB);
     }
 

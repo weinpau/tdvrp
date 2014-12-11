@@ -5,6 +5,7 @@ import de.hszg.tdvrp.core.model.Instance;
 import de.hszg.tdvrp.core.model.Numberable;
 import de.hszg.tdvrp.core.tdfunction.TDFunction;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Random;
@@ -50,6 +51,9 @@ public final class PopulationCreator {
                 routes.add(newRoute);
             }
         }
+        
+        Collections.shuffle(routes);
+        
         int[] route = new int[instance.getCustomers().size()];
         int i = 0;
         while (!routes.isEmpty()) {

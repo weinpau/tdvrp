@@ -1,6 +1,7 @@
 package de.hszg.tdvrp.solver.ga.splitter;
 
 import de.hszg.tdvrp.solver.ga.splitter.VehicleMinimizingSplitter;
+import gnu.trove.TDoubleArrayList;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,12 +22,12 @@ public class VehicleMinimizingSplitterTest {
     @Test
     public void testShortestPath() {
         int[] route = new int[]{1, 2, 3, 4};
-        List<List<Double>> travelTimes = new ArrayList<>();
-        travelTimes.add(Arrays.asList(10d, 20d));
-        travelTimes.add(Arrays.asList(100d));
-        travelTimes.add(Arrays.asList(50d, 10d));
-        travelTimes.add(Arrays.asList(70d));
-        travelTimes.add(Collections.emptyList());
+        List<TDoubleArrayList> travelTimes = new ArrayList<>();
+        travelTimes.add(new TDoubleArrayList(new double[] {10d, 20d}));
+        travelTimes.add(new TDoubleArrayList(new double[] {100d}));
+        travelTimes.add(new TDoubleArrayList(new double[] {50d, 10d}));
+        travelTimes.add(new TDoubleArrayList(new double[] {70d}));
+        travelTimes.add(new TDoubleArrayList());
 
         VehicleMinimizingSplitter instance = new VehicleMinimizingSplitter();
 

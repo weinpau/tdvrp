@@ -7,7 +7,7 @@ import java.util.Random;
  *
  * @author weinpau
  */
-public class LocalSearchMutation implements Mutation {
+public class LocalSearch implements Mutation {
 
     Random random = new Random();
 
