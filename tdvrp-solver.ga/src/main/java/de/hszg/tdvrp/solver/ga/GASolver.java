@@ -69,19 +69,15 @@ public class GASolver implements Solver {
                     other = (other + 1) % length;
                 }
                 Chromosome child = selection.get(i).cross(selection.get(other));
-
                 if (random.nextDouble() <= options.mutationProbability()) {
                     child.mutate();
                 }
-
                 children.add(child);
-
             }
 
             population = options.replacement().replace(population, children);
-
             Chromosome best = population.getBestChromosome().orElse(null);
-
+            
             double populationFitness = population.getChromosomes().stream().mapToDouble(c -> c.fitness()).sum();
 
             if (best != null && (bestEver == null || bestEver.fitness() < best.fitness())) {

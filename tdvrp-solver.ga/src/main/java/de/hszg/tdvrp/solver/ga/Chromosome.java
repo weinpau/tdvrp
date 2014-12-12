@@ -88,7 +88,7 @@ public class Chromosome {
     public Chromosome cross(Chromosome other) {
         int crossover = random.nextInt(options.crossovers().length);
         ChromosomePair pair = options.crossovers()[crossover].cross(this, other);
-        if (pair.left().fitness() > pair.right().fitness()) {
+        if (random.nextInt(1) == 0) {
             return pair.left();
         } else {
             return pair.right();
@@ -106,7 +106,9 @@ public class Chromosome {
     }
 
     public Chromosome child() {
-        return new Chromosome(instance, tdFunction, options, route, generation + 1);
+        Chromosome chromosome = new Chromosome(instance, tdFunction, options, route, generation + 1);
+        chromosome.fitness = fitness;
+        return chromosome;
     }
 
     public Chromosome copy(int[] route) {

@@ -1,16 +1,10 @@
 package de.hszg.tdvrp.solver.ga;
 
-import de.hszg.tdvrp.solver.ga.replacement.RestrictedTournamentReplacement;
-import de.hszg.tdvrp.solver.ga.replacement.Replacement;
-import de.hszg.tdvrp.solver.ga.selection.Selection;
-import de.hszg.tdvrp.solver.ga.selection.RouletteSelection;
-import de.hszg.tdvrp.solver.ga.splitter.VehicleMinimizingSplitter;
-import de.hszg.tdvrp.solver.ga.splitter.Splitter;
-import de.hszg.tdvrp.solver.ga.mutation.Mutation;
-import de.hszg.tdvrp.solver.ga.mutation.LocalSearch;
-import de.hszg.tdvrp.solver.ga.crossover.Crossover;
-import de.hszg.tdvrp.solver.ga.crossover.OX;
+import de.hszg.tdvrp.solver.ga.splitter.*;
+import de.hszg.tdvrp.solver.ga.crossover.*;
 import de.hszg.tdvrp.solver.ga.mutation.*;
+import de.hszg.tdvrp.solver.ga.replacement.*;
+import de.hszg.tdvrp.solver.ga.selection.*;
 
 /**
  *
@@ -20,7 +14,7 @@ public final class GAOptions {
 
     private int populationSize = 30;
 
-    private int maxRounds = 50000;
+    private int maxRounds = 100000;
     private int maxRoundsWithoutImproving = 5000;
     private double selectionRate = .5;
     private double mutationProbability = 0.3;
@@ -31,7 +25,7 @@ public final class GAOptions {
     private Splitter splitter = new VehicleMinimizingSplitter();
 
     private Mutation[] mutations = new Mutation[]{new LocalSearch(), new CIM(), new RSM(), new TWORS()};
-    private Crossover[] crossovers = new Crossover[]{new OX()};
+    private Crossover[] crossovers = new Crossover[]{new OX(), new NWOX()};
 
     public int populationSize() {
         return populationSize;

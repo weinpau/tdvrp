@@ -33,7 +33,25 @@ public class NWOXTest {
         assertArrayEquals(new int[]{6, 1, 14, 11, 12, 13, 4, 8, 15, 10, 9, 7, 5, 2, 3}, c2);
 
     }
-    
-    
+
+    /**
+     * Test of cross method, of class NWOX.
+     */
+    @Test
+    public void testCross_2() {
+        Chromosome p1 = new Chromosome(null, null, null, new int[]{1, 2, 3, 5, 7, 8, 9, 10, 4, 6, 11}, 0);
+        Chromosome p2 = new Chromosome(null, null, null, new int[]{1, 3, 4, 7, 8, 9, 11, 10, 5, 6, 2}, 0);
+
+        NWOX instance = new NWOX();
+
+        ChromosomePair result = instance.cross(p1, p2, 4, 7);
+
+        int[] c1 = result.left().route();
+        int[] c2 = result.right().route();
+
+        assertArrayEquals(new int[]{1, 2, 3, 5, 8, 9, 11, 10, 7, 4, 6}, c1);
+        assertArrayEquals(new int[]{1, 3, 4, 11, 7, 8, 9, 10, 5, 6, 2}, c2);
+
+    }
 
 }

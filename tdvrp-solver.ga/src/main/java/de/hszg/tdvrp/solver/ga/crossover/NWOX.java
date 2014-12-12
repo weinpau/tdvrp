@@ -48,20 +48,25 @@ public class NWOX implements Crossover {
 
         for (int i = 0; i < csA; i++) {
             if (Arrays.binarySearch(t2, p1.route()[i]) < 0) {
-                c1[iA] = p1.route()[i];
-                iA++;
+                c1[iA++] = p1.route()[i];
             }
             if (Arrays.binarySearch(t1, p2.route()[i]) < 0) {
-                c2[iB] = p2.route()[i];
-                iB++;
+                c2[iB++] = p2.route()[i];
             }
         }
-
+        int j = csA;
         for (int i = iA; i < csA; i++) {
-            c1[i] = p1.route()[csA + (i - iA)];
+            while (Arrays.binarySearch(t2, p1.route()[j]) >= 0) {
+                j++;
+            }
+            c1[i] = p1.route()[j++];
         }
+        j = csA;
         for (int i = iB; i < csA; i++) {
-            c2[i] = p2.route()[csA + (i - iB)];
+            while (Arrays.binarySearch(t1, p2.route()[j]) >= 0) {
+                j++;
+            }
+            c2[i] = p2.route()[j++];
         }
 
         iA = length - 1;
@@ -69,20 +74,28 @@ public class NWOX implements Crossover {
 
         for (int i = length - 1; i > csB; i--) {
             if (Arrays.binarySearch(t2, p1.route()[i]) < 0) {
-                c1[iA] = p1.route()[i];
-                iA--;
+                c1[iA--] = p1.route()[i];
             }
             if (Arrays.binarySearch(t1, p2.route()[i]) < 0) {
-                c2[iB] = p2.route()[i];
-                iB--;
+                c2[iB--] = p2.route()[i];
             }
         }
-        
+
+        j = csB;
         for (int i = iA; i > csB; i--) {
-            c1[i] = p1.route()[csB - (iA - i)];
+            while (Arrays.binarySearch(t2, p1.route()[j]) >= 0) {
+                j--;
+            }
+
+            c1[i] = p1.route()[j--];
         }
+        j = csB;
         for (int i = iB; i > csB; i--) {
-            c2[i] = p2.route()[csB - (iB - i)];
+            while (Arrays.binarySearch(t1, p2.route()[j]) >= 0) {
+                j--;
+            }
+
+            c2[i] = p2.route()[j--];
         }
 
         return new ChromosomePair(p1.copy(c1), p2.copy(c2));
