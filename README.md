@@ -2,7 +2,9 @@
 
 This project is a student project which is developed as part of a research project at the [Hochschule Zittau/Görlitz](http://www.hszg.de/).
 
-The goal is to realize an optimization algorithm for time-dependent VRPs. In contrast to classical VRPs the tour of vehicles between two nodes is influenced through additional constraints. The instances of A. M. Figliozzi [[2011](http://www.sciencedirect.com/science/article/pii/S1366554511001426)], be used for the evaluation.
+The vehicle routing problem with time windows (VRPTW) models many practical optimisation problems in logistics or maintenance of geographically distributed organisations. In practice, the classical model is often not adequate because constant travel times between locations are assumed. Time-varying factors, such as traffic conditions or weather have a significant impact on the actual travel time. Therefore, the travel time between two locations, depends on the specific departure time. To represent these external influences, the VRPTW is extended to a time-dependent vehicle routing problem with time windows (TDVRP). In this case the changing driving time is represented by a time-dependent function. 
+
+The present research results are limited to a consideration of TDVRP with hard time windows. This means, the service must necessarily start in the given time window. It follows that an early arrival or later departure is feasible. For evaluation of the results, we consider recently published time-dependent problem instances of A. M. Figliozzi [[2011](http://www.sciencedirect.com/science/article/pii/S1366554511001426)], where the classical Solomon instances are combined with time-dependent speed models.
 
 The solution and optimization process is divided into two phases:
 
@@ -13,14 +15,16 @@ The solution and optimization process is divided into two phases:
 ### Features ###
 
 
-#### Implemented Solvers ####
+#### Implemented solvers ####
 
-- [Dummy Solver](tdvrp-solver.dummy/) - a simple solver, which distributes tasks without optimization on the available vehicles
+- [Constructive solver](tdvrp-solver.dummy/) - a constructive solver, which distributes tasks without travel time optimization
+- [GA solver](tdvrp-solver.ga/) - a genetic solver algorithm
 
-#### Implemented Schedulers ####
+#### Implemented schedulers ####
 
 
-- [Straight Scheduler](tdvrp-scheduler.straight/) - the resulting schedule is directly and is determined without optimizing the travel time
+- [Straight scheduler](tdvrp-scheduler.straight/) - the resulting schedule is directly and is determined without optimizing the travel time
+- [Greedy scheduler](tdvrp-scheduler.greedy/) - a greedy-heuristic scheduler
 
 #### Server ####
 
@@ -44,7 +48,7 @@ The following sample code is also available in the sub-project [tdvrp-example](t
     TDFunction tdFunction = tdFunctionFactory.createTDFunction(instance);
 
     // instantiate the solver
-    Solver solver = new DummySolver();
+    Solver solver = new GASolver();
 
     // search for a solution
     Solution solution = solver.solve(instance, tdFunction).orElse(null);
