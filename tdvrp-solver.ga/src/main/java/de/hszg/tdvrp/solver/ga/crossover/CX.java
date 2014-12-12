@@ -2,6 +2,7 @@ package de.hszg.tdvrp.solver.ga.crossover;
 
 import de.hszg.tdvrp.solver.ga.Chromosome;
 import de.hszg.tdvrp.solver.ga.ChromosomePair;
+import de.hszg.tdvrp.solver.ga.GASolver;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.Set;
  */
 public class CX implements Crossover {
 
-    Random random = new Random();
+    Random random = new Random(GASolver.RANDOM_SEED);
 
     @Override
     public ChromosomePair cross(Chromosome p1, Chromosome p2) {

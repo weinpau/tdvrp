@@ -1,6 +1,7 @@
 package de.hszg.tdvrp.solver.ga.selection;
 
 import de.hszg.tdvrp.solver.ga.Chromosome;
+import de.hszg.tdvrp.solver.ga.GASolver;
 import de.hszg.tdvrp.solver.ga.Population;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,13 +14,12 @@ import java.util.Random;
  */
 public class RouletteSelection implements Selection {
 
-    Random random = new Random();
+    Random random = new Random(GASolver.RANDOM_SEED);
 
     @Override
     public Collection<Chromosome> select(Population population, int selectionSize) {
 
         List<Chromosome> result = new ArrayList<>();
-
         List<Chromosome> candidates = new ArrayList<>(population.getChromosomes());
 
         while (result.size() < selectionSize) {

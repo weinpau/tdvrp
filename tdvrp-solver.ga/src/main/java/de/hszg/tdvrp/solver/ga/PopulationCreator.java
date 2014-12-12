@@ -17,7 +17,7 @@ import java.util.Stack;
  */
 public final class PopulationCreator {
 
-    private static final Random random = new Random();
+    private static final Random random = new Random(GASolver.RANDOM_SEED);
 
     public static Population createPopulation(Instance instance, TDFunction tdFunction, GAOptions options) {
 
@@ -52,7 +52,7 @@ public final class PopulationCreator {
             }
         }
         
-        Collections.shuffle(routes);
+        Collections.shuffle(routes, random);
         
         int[] route = new int[instance.getCustomers().size()];
         int i = 0;

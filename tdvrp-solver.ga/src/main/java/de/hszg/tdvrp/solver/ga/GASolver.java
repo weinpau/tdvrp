@@ -17,7 +17,9 @@ import java.util.stream.Collectors;
  */
 public class GASolver implements Solver {
 
-    Random random = new Random();
+    public static final long RANDOM_SEED = 1000;
+    
+    Random random = new Random(RANDOM_SEED);
 
     GAOptions options = new GAOptions();
 

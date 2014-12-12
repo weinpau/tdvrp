@@ -1,6 +1,7 @@
 package de.hszg.tdvrp.solver.ga.mutation;
 
 import de.hszg.tdvrp.solver.ga.Chromosome;
+import de.hszg.tdvrp.solver.ga.GASolver;
 import java.util.Random;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Random;
  */
 public class TWORS implements Mutation {
 
-    Random random = new Random();
+    Random random = new Random(GASolver.RANDOM_SEED);
 
     @Override
     public void mutate(Chromosome chromosome) {

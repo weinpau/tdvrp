@@ -23,7 +23,7 @@ public class Chromosome {
     int generation;
     double fitness = -1;
 
-    static Random random = new Random();
+    static Random random = new Random(GASolver.RANDOM_SEED);
 
     public Chromosome(Instance instance, TDFunction tdFunction, GAOptions options, int[] route, int generation) {
         this.instance = instance;
