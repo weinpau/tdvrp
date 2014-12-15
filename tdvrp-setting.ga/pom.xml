@@ -43,8 +43,14 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>tdvrp-solver.dummy</artifactId>
             <version>${project.version}</version>
-        </dependency>         
-                  
+        </dependency> 
+        
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20141113</version>
+        </dependency> 
+        
     </dependencies>
     
     <build>        

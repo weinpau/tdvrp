@@ -1,0 +1,25 @@
+{
+	"populationSize" : 40,
+	"maxRounds" : 100000,
+	"maxRoundsWithoutImproving" : 2000,
+	"initPopulationVariance" : 1.4,
+	"mutationProbability" : .2,
+	"selectionRate": .6,
+	
+	"selection" : "de.hszg.tdvrp.solver.ga.selection.RouletteSelection",
+	"splitter" : "de.hszg.tdvrp.solver.ga.splitter.VehicleMinimizingSplitter",
+	"replacement" : "de.hszg.tdvrp.solver.ga.replacement.RestrictedTournamentReplacement",
+	
+	"crossovers" : [
+		"de.hszg.tdvrp.solver.ga.crossover.OX"
+	],
+	
+	"mutations" : [
+		"de.hszg.tdvrp.solver.ga.mutation.LocalSearch",
+		"de.hszg.tdvrp.solver.ga.mutation.CIM",
+		"de.hszg.tdvrp.solver.ga.mutation.RSM",
+		"de.hszg.tdvrp.solver.ga.mutation.TWORS"
+		
+	]
+
+}
