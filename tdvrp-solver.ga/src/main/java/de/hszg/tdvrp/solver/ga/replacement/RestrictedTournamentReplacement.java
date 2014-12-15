@@ -2,9 +2,7 @@ package de.hszg.tdvrp.solver.ga.replacement;
 
 import de.hszg.tdvrp.solver.ga.Chromosome;
 import de.hszg.tdvrp.solver.ga.Population;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  *
@@ -13,11 +11,8 @@ import java.util.List;
 public class RestrictedTournamentReplacement implements Replacement {
 
     @Override
-    public Population replace(Population population, Collection<Chromosome> children) {
+    public void replace(Population population, Collection<Chromosome> children) {
 
-        List<Chromosome> newPopulation = new ArrayList<>(population.getChromosomes());
-        
-               
         children.forEach(child -> {
             int distance = Integer.MAX_VALUE;
             Chromosome similarParent = null;
@@ -29,14 +24,11 @@ public class RestrictedTournamentReplacement implements Replacement {
                 }
             }
             if (similarParent != null && similarParent.fitness() < child.fitness()) {
-                if (newPopulation.remove(similarParent)) {
-                 
-                    newPopulation.add(child);
+                if (population.remove(similarParent)) {
+                    population.add(child);
                 }
             }
         });
-
-        return new Population(newPopulation);
 
     }
 

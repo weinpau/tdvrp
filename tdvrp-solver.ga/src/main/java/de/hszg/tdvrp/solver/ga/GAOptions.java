@@ -14,10 +14,10 @@ public final class GAOptions {
 
     private int populationSize = 30;
 
-    private int maxRounds = 100000;
+    private int maxRounds = 200000;
     private int maxRoundsWithoutImproving = 5000;
-    private double selectionRate = .5;
-    private double mutationProbability = 0.3;
+    private double selectionRate = .6;
+    private double mutationProbability = 0.1;
     private double initPopulationVariance = 1.5;
 
     private Selection selection = new RouletteSelection();
@@ -25,7 +25,7 @@ public final class GAOptions {
     private Splitter splitter = new VehicleMinimizingSplitter();
 
     private Mutation[] mutations = new Mutation[]{new LocalSearch(), new CIM(), new RSM(), new TWORS()};
-    private Crossover[] crossovers = new Crossover[]{new OX(), new NWOX()};
+    private Crossover[] crossovers = new Crossover[]{new OX()};
 
     public int populationSize() {
         return populationSize;

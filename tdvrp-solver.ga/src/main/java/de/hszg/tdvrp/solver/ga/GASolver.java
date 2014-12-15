@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
  */
 public class GASolver implements Solver {
 
-    public static final long RANDOM_SEED = 1000;
-    
+    public static final long RANDOM_SEED = System.nanoTime();
+
     Random random = new Random(RANDOM_SEED);
 
     GAOptions options = new GAOptions();
@@ -77,9 +77,9 @@ public class GASolver implements Solver {
                 children.add(child);
             }
 
-            population = options.replacement().replace(population, children);
+            options.replacement().replace(population, children);
             Chromosome best = population.getBestChromosome().orElse(null);
-            
+
             double populationFitness = population.getChromosomes().stream().mapToDouble(c -> c.fitness()).sum();
 
             if (best != null && (bestEver == null || bestEver.fitness() < best.fitness())) {
@@ -104,5 +104,4 @@ public class GASolver implements Solver {
 
     }
 
-   
 }

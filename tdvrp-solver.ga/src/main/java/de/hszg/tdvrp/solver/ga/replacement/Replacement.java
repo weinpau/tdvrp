@@ -10,6 +10,6 @@ import java.util.Collection;
  */
 public interface Replacement {
     
-    Population replace(Population population, Collection<Chromosome> children);
+    void replace(Population population, Collection<Chromosome> children);
     
 }

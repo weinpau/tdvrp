@@ -22,6 +22,23 @@ public final class Population {
         return Collections.unmodifiableSet(chromosomes);
     }
 
+    public void add(Chromosome chromosome) {
+        chromosomes.add(chromosome);
+    }
+
+    public void addAll(Collection<Chromosome> chromosomes) {
+        this.chromosomes.addAll(chromosomes);
+    }
+
+    public boolean remove(Chromosome chromosome) {
+        return chromosomes.remove(chromosome);
+    }
+
+    public boolean removeAll() {
+        chromosomes.clear();
+        return true;
+    }
+
     public Optional<Chromosome> getBestChromosome() {
         if (chromosomes.isEmpty()) {
             return Optional.empty();
@@ -34,5 +51,18 @@ public final class Population {
         }
         return Optional.of(best);
     }
-    
+
+    public Optional<Chromosome> getWorstChromosome() {
+        if (chromosomes.isEmpty()) {
+            return Optional.empty();
+        }
+        Chromosome worst = null;
+        for (Chromosome c : chromosomes) {
+            if (worst == null || c.fitness() < worst.fitness()) {
+                worst = c;
+            }
+        }
+        return Optional.of(worst);
+    }
+
 }

@@ -40,7 +40,7 @@ public class Chromosome {
             for (int[] r : subRoutes) {
                 totalDuration += assumedTravelTime(r);
             }
-            fitness = 1d / (subRoutes.size() + totalDuration / instance.getDepot().getClosingTime());
+            fitness = 1d / (subRoutes.size() + totalDuration / (instance.getDepot().getClosingTime() * subRoutes.size()));
         }
         return fitness;
     }
@@ -70,6 +70,7 @@ public class Chromosome {
 
     public void route(int[] route) {
         this.route = route;
+        this.fitness = -1;
     }
 
     public Collection<Route> routes(Splitter splitter) {
@@ -113,6 +114,13 @@ public class Chromosome {
 
     public Chromosome copy(int[] route) {
         return new Chromosome(instance, tdFunction, options, route, generation);
+    }
+
+    public Chromosome copy() {
+        Chromosome chromosome = new Chromosome(instance, tdFunction, options, route, generation);
+        chromosome.fitness = fitness;
+        return chromosome;
+
     }
 
     double assumedTravelTime(int[] route) {

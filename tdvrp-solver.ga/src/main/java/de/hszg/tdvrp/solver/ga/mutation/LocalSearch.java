@@ -14,36 +14,32 @@ public class LocalSearch implements Mutation {
 
     @Override
     public void mutate(Chromosome chromosome) {
-        Chromosome mutated;
-        Chromosome best = chromosome;
-        int length = best.route().length;
+        Chromosome mutated = chromosome.copy(chromosome.route());
+        int length = chromosome.route().length;
 
         int sA = random.nextInt(length);
         int sB = random.nextInt(length);
 
-        int rangeA = Math.min(random.nextInt(10), length);
-        int rangeB = Math.min(random.nextInt(10), length);
+        int[] mutatedRoute = mutated.route();
 
-        for (int i = 0; i < rangeA; i++) {
+        for (int i = 0; i < length; i++) {
             int iA = (sA + i) % length;
-            for (int j = 0; j < rangeB; j++) {
+            for (int j = 0; j < length; j++) {
                 int iB = (sB + j) % length;
-
-                mutated = best.copy(best.route());
-                int[] mutatedRoute = mutated.route();
 
                 int tmp = mutatedRoute[iA];
                 mutatedRoute[iA] = mutatedRoute[iB];
                 mutatedRoute[iB] = tmp;
+                mutated.route(mutatedRoute);
 
-                if (mutated.fitness() > best.fitness()) {
-                    best = mutated;
-                    break;
+                if (mutated.fitness() > chromosome.fitness()) {
+                    chromosome.route(mutated.route());            
+                    return;
+                } else {
+                    mutatedRoute[iB] = mutatedRoute[iA];
+                    mutatedRoute[iA] = tmp;
                 }
             }
-        }
-        if (chromosome.fitness() < best.fitness()) {
-            chromosome.route(best.route());
         }
 
     }

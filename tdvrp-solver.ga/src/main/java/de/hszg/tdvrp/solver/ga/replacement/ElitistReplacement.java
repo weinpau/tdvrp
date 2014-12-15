@@ -16,13 +16,15 @@ public class ElitistReplacement implements Replacement {
     ElitistSelection selection = new ElitistSelection();
 
     @Override
-    public Population replace(Population parentPopulation, Collection<Chromosome> children) {
+    public void replace(Population parentPopulation, Collection<Chromosome> children) {
 
         List<Chromosome> chromosomes = new ArrayList<>();
         chromosomes.addAll(parentPopulation.getChromosomes());
         chromosomes.addAll(children);
 
-        return new Population(selection.select(new Population(chromosomes), parentPopulation.getChromosomes().size()));
+        parentPopulation.removeAll();
+        parentPopulation.addAll(selection.select(new Population(chromosomes), parentPopulation.getChromosomes().size()));
+
     }
 
 }
