@@ -38,12 +38,7 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>tdvrp-solver.ga</artifactId>
             <version>${project.version}</version>
-        </dependency>  
-        <dependency>       
-            <groupId>${project.groupId}</groupId>
-            <artifactId>tdvrp-solver.dummy</artifactId>
-            <version>${project.version}</version>
-        </dependency> 
+        </dependency>          
         
         <dependency>
             <groupId>org.json</groupId>
@@ -63,6 +58,32 @@
                     <mainClass>${project.mainClass}</mainClass>                 
                 </configuration>
             </plugin>
+            
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>${project.mainClass}</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <finalName>${project.artifactId}-${project.version}-standalone</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin> 
+            
         </plugins>     
     </build>
     
