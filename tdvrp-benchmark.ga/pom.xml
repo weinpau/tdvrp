@@ -6,16 +6,12 @@
         <artifactId>tdvrp</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>tdvrp-example</artifactId>
+    <artifactId>tdvrp-benchmark.ga</artifactId>
     <packaging>jar</packaging>
     
-    <description>This project contains an example of the interaction of the individual components.</description>
-    
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.mainClass>de.hszg.tdvrp.example.App</project.mainClass>
+        <project.mainClass>de.hszg.tdvrp.benchmark.ga.App</project.mainClass>
     </properties>
-    
     
     <dependencies>     
         <dependency>
@@ -25,9 +21,9 @@
         </dependency>       
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>tdvrp-instances</artifactId>
+            <artifactId>tdvrp-benchmark</artifactId>
             <version>${project.version}</version>
-        </dependency>                            
+        </dependency>                                
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>tdvrp-tdfactories</artifactId>
@@ -35,37 +31,23 @@
         </dependency>                                                 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>tdvrp-scheduler.straight</artifactId>
-            <version>${project.version}</version>
-        </dependency> 
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>tdvrp-scheduler.greedy</artifactId>
             <version>${project.version}</version>
-        </dependency>            
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>tdvrp-solver.greedy</artifactId>
-            <version>${project.version}</version>
-        </dependency>  
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>tdvrp-solver.random</artifactId>
-            <version>${project.version}</version>
-        </dependency>  
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>tdvrp-solver.clarke</artifactId>
-            <version>${project.version}</version>
-        </dependency>  
-        <dependency>
+        </dependency> 
+        <dependency>       
             <groupId>${project.groupId}</groupId>
             <artifactId>tdvrp-solver.ga</artifactId>
             <version>${project.version}</version>
-        </dependency>         
-                  
+        </dependency>      
+             
+        
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20141113</version>
+        </dependency> 
+        
     </dependencies>
-    
     
     <build>        
         <plugins>     
@@ -77,8 +59,33 @@
                     <mainClass>${project.mainClass}</mainClass>                 
                 </configuration>
             </plugin>
+            
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>${project.mainClass}</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <finalName>${project.artifactId}-${project.version}-standalone</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin> 
+            
         </plugins>     
     </build>
-            
-            
+    <name>tdvrp-benchmark.ga</name>
 </project>

@@ -14,18 +14,21 @@
     <modules>
         <module>tdvrp-core</module>
         <module>tdvrp-instances</module>
-        <module>tdvrp-tdfactories</module>
-               
-        <module>tdvrp-solver.dummy</module>   
+        <module>tdvrp-tdfactories</module>   
+       
         <module>tdvrp-solver.ga</module>
+        <module>tdvrp-solver.random</module>
+        <module>tdvrp-solver.greedy</module>
+        <module>tdvrp-solver.clarke</module>
             
         <module>tdvrp-scheduler.greedy</module>
         <module>tdvrp-scheduler.straight</module>
         
         <module>tdvrp-example</module>
         <module>tdvrp-server</module>
-        <module>tdvrp-setting.ga</module>
         <module>tdvrp-benchmark</module>
+        <module>tdvrp-benchmark.ga</module>
+
     </modules>
     
     <dependencyManagement>

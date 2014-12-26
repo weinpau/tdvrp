@@ -6,6 +6,7 @@ import de.hszg.tdvrp.core.model.Instance;
 import de.hszg.tdvrp.core.solver.Route;
 import de.hszg.tdvrp.core.tdfunction.TDFunction;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
@@ -89,7 +90,8 @@ public class Chromosome {
     public Chromosome cross(Chromosome other) {
         int crossover = random.nextInt(options.crossovers().length);
         ChromosomePair pair = options.crossovers()[crossover].cross(this, other);
-        if (random.nextInt(1) == 0) {
+
+        if (pair.left().fitness() > pair.right().fitness()) {
             return pair.left();
         } else {
             return pair.right();
@@ -107,7 +109,9 @@ public class Chromosome {
     }
 
     public Chromosome child() {
-        Chromosome chromosome = new Chromosome(instance, tdFunction, options, route, generation + 1);
+        Chromosome chromosome = new Chromosome(instance, tdFunction, options,
+                Arrays.copyOf(route, route.length),
+                generation + 1);
         chromosome.fitness = fitness;
         return chromosome;
     }
@@ -117,7 +121,8 @@ public class Chromosome {
     }
 
     public Chromosome copy() {
-        Chromosome chromosome = new Chromosome(instance, tdFunction, options, route, generation);
+        Chromosome chromosome = new Chromosome(instance, tdFunction, options,
+                Arrays.copyOf(route, route.length), generation);
         chromosome.fitness = fitness;
         return chromosome;
 

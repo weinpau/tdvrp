@@ -28,7 +28,7 @@ public final class Instances {
         }
     }
 
-    public static List<Instance> getInstances() {
+    public synchronized static List<Instance> getInstances() {
         return Collections.unmodifiableList(instances);
     }
 

@@ -64,9 +64,7 @@ public class GASolver implements Solver {
             int length = selection.size();
 
             for (int i = 0; i < length; i++) {
-
                 int other = random.nextInt(length);
-
                 if (other == i) {
                     other = (other + 1) % length;
                 }
@@ -93,7 +91,7 @@ public class GASolver implements Solver {
             } else {
                 roundsSinceLastImprovement++;
             }
-
+            
         }
 
         if (bestEver == null) {

@@ -14,7 +14,7 @@ public class LocalSearch implements Mutation {
 
     @Override
     public void mutate(Chromosome chromosome) {
-        Chromosome mutated = chromosome.copy(chromosome.route());
+        Chromosome mutated = chromosome.copy();
         int length = chromosome.route().length;
 
         int sA = random.nextInt(length);
@@ -33,7 +33,7 @@ public class LocalSearch implements Mutation {
                 mutated.route(mutatedRoute);
 
                 if (mutated.fitness() > chromosome.fitness()) {
-                    chromosome.route(mutated.route());            
+                    chromosome.route(mutated.route());
                     return;
                 } else {
                     mutatedRoute[iB] = mutatedRoute[iA];

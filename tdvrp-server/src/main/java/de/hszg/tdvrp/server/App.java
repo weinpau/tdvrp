@@ -4,7 +4,6 @@ import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import de.hszg.tdvrp.core.scheduler.Scheduler;
 import de.hszg.tdvrp.core.solver.Solver;
 import de.hszg.tdvrp.scheduler.straight.StraightScheduler;
-import de.hszg.tdvrp.solver.dummy.DummySolver;
 import de.hszg.tdvrp.solver.ga.GASolver;
 import java.net.URI;
 import javax.ws.rs.core.UriBuilder;

@@ -44,7 +44,7 @@ public class Benchmark {
         for (Instance instance : instances) {
             TDFunction tdFunction = tdFunctionFactory.createTDFunction(instance);
             System.out.println("benchmark " + instance.getName());
-            int bestNûmberOfVehicles = Integer.MAX_VALUE;
+            int bestNumberOfVehicles = Integer.MAX_VALUE;
             double bestTravelTime = Double.POSITIVE_INFINITY;
             double bestDistance = Double.POSITIVE_INFINITY;
 
@@ -57,10 +57,10 @@ public class Benchmark {
                 double travelTime = schedule.getTravelTime();
                 double distance = schedule.getTotalDistance();
 
-                if (bestNûmberOfVehicles > vehicles
-                        || (bestNûmberOfVehicles == vehicles && (bestTravelTime > travelTime
+                if (bestNumberOfVehicles > vehicles
+                        || (bestNumberOfVehicles == vehicles && (bestTravelTime > travelTime
                         || (bestTravelTime == travelTime && bestDistance > distance)))) {
-                    bestNûmberOfVehicles = vehicles;
+                    bestNumberOfVehicles = vehicles;
                     bestTravelTime = schedule.getTravelTime();
                     bestDistance = distance;
                 }
@@ -68,9 +68,9 @@ public class Benchmark {
             }
 
             System.out.println("instance results");
-            System.out.println("vehicles: " + bestNûmberOfVehicles + ", travel time: " + bestTravelTime + ", distance: " + bestDistance);
+            System.out.println("vehicles: " + bestNumberOfVehicles + ", travel time: " + bestTravelTime + ", distance: " + bestDistance);
 
-            sumOfVehicles += bestNûmberOfVehicles;
+            sumOfVehicles += bestNumberOfVehicles;
             sumOfTravelTimes += bestTravelTime;
             sumOfDistance += bestDistance;
         }
