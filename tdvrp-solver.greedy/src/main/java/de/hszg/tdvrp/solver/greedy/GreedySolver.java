@@ -48,13 +48,8 @@ public class GreedySolver implements Solver {
         return result;
 
     }
-
-    @Override
-    public Optional<Solution> solve(Instance instance, TDFunction tdFunction, int expectedNumberOfVehicles) {
-
-        if (expectedNumberOfVehicles < 0) {
-            throw new IllegalArgumentException("The number of vehicles must be greater than zero.");
-        }
+    
+    private Optional<Solution> solve(Instance instance, TDFunction tdFunction, int expectedNumberOfVehicles) {
 
         PriorityQueue<Customer> unallocated = new PriorityQueue<>((a, b) -> Double.compare(a.getDueTime(), b.getDueTime()));
         unallocated.addAll(instance.getCustomers());

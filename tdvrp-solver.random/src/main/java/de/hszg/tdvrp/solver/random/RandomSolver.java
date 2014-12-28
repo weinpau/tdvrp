@@ -48,8 +48,7 @@ public class RandomSolver implements Solver {
         return result;
     }
 
-    @Override
-    public Optional<Solution> solve(Instance instance, TDFunction tdFunction, int expectedNumberOfVehicles) {
+    private Optional<Solution> solve(Instance instance, TDFunction tdFunction, int expectedNumberOfVehicles) {
 
         List<Customer> unallocated = new ArrayList<>(instance.getCustomers());
         List<Stack<Customer>> routes = initRoutes(expectedNumberOfVehicles, unallocated);

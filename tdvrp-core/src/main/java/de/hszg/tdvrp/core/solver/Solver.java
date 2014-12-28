@@ -29,17 +29,4 @@ public interface Solver {
      */
     Optional<Solution> solve(Instance instance, TDFunction tdFunction);
 
-    /**
-     * Returns the computed solution for the given instance and the
-     * time-dependent function. Furthermore, the number of vehicles used for the
-     * solution is set with the parameter {@code expectedNumberOfVehicles}. The optional
-     * object is empty if no solution exists.
-     *
-     * @param instance the instance
-     * @param tdFunction the time-dependent function
-     * @param expectedNumberOfVehicles the number of expected vehicles
-     * @return the solution
-     */
-    Optional<Solution> solve(Instance instance, TDFunction tdFunction, int expectedNumberOfVehicles);
-
 }

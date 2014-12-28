@@ -11,12 +11,10 @@ public class SolveRequest {
 
     private final Instance instance;
     private final TDFunction tdFunction;
-    private final Integer expectedNumberOfVehicles;
 
-    public SolveRequest(Instance instance, TDFunction tdFunction, Integer expectedNumberOfVehicles) {
+    public SolveRequest(Instance instance, TDFunction tdFunction) {
         this.instance = instance;
         this.tdFunction = tdFunction;
-        this.expectedNumberOfVehicles = expectedNumberOfVehicles;
     }
 
     public Instance getInstance() {
@@ -25,10 +23,6 @@ public class SolveRequest {
 
     public TDFunction getTDFunction() {
         return tdFunction;
-    }
-
-    public Integer getExpectedNumberOfVehicles() {
-        return expectedNumberOfVehicles;
     }
 
 }

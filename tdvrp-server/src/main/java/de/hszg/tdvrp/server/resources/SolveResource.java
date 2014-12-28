@@ -49,11 +49,8 @@ public class SolveResource {
     }
 
     private Solution createSolution(SolveRequest solveRequest) {
-        if (solveRequest.getExpectedNumberOfVehicles() == null) {
-            return solver.solve(solveRequest.getInstance(), solveRequest.getTDFunction()).get();
-        } else {
-            return solver.solve(solveRequest.getInstance(), solveRequest.getTDFunction(), solveRequest.getExpectedNumberOfVehicles()).get();
-        }
+        return solver.solve(solveRequest.getInstance(), solveRequest.getTDFunction()).get();
+
     }
 
 }

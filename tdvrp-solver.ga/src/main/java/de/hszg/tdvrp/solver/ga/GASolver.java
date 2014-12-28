@@ -37,16 +37,7 @@ public class GASolver implements Solver {
 
     @Override
     public Optional<Solution> solve(Instance instance, TDFunction tdFunction) {
-        return solve(instance, tdFunction, instance.getAvailableVehicles());
-
-    }
-
-    @Override
-    public Optional<Solution> solve(Instance instance, TDFunction tdFunction, int expectedNumberOfVehicles) {
-        if (expectedNumberOfVehicles < 0) {
-            throw new IllegalArgumentException("The number of vehicles must be greater than zero.");
-        }
-
+   
         Population population = PopulationCreator.createPopulation(instance, tdFunction, options);
         Chromosome bestEver = null;
         int round = options.maxRounds();

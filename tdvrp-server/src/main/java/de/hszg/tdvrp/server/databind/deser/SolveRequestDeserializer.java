@@ -30,7 +30,6 @@ public class SolveRequestDeserializer extends StdDeserializer<SolveRequest> {
         }
         String instanceName = null;
         String tdFunctionName = "DEFAULT";
-        Integer expectedNumberOfVehicles = null;
 
         while (jp.nextToken() != JsonToken.END_OBJECT) {
             String fieldname = jp.getCurrentName();
@@ -41,20 +40,17 @@ public class SolveRequestDeserializer extends StdDeserializer<SolveRequest> {
                         tdFunctionName = jp.getText();
                         break;
                     case "instance":
-                        instanceName = jp.getText();
-                        break;
-                    case "expectedVehicles":
-                        expectedNumberOfVehicles = (Integer) jp.getNumberValue();
+                        instanceName = jp.getText();                    
                 }
             }
         }
         jp.close();
 
-        return createSolveRequest(instanceName, tdFunctionName, expectedNumberOfVehicles);
+        return createSolveRequest(instanceName, tdFunctionName);
 
     }
 
-    private SolveRequest createSolveRequest(String instanceName, String tdFunctionName, Integer expectedNumberOfVehicles) {
+    private SolveRequest createSolveRequest(String instanceName, String tdFunctionName) {
         TDFunction tdFunction = null;
         Instance instance = Instances.getInstanceByName(instanceName).orElse(null);
         if (instance != null) {
@@ -63,7 +59,7 @@ public class SolveRequestDeserializer extends StdDeserializer<SolveRequest> {
                 tdFunction = tdFunctionFactory.createTDFunction(instance);
             }
         }
-        return new SolveRequest(instance, tdFunction, expectedNumberOfVehicles);
+        return new SolveRequest(instance, tdFunction);
     }
 
 }

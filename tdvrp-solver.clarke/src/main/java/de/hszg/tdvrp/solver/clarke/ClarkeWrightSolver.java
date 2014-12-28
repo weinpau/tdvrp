@@ -98,11 +98,6 @@ public class ClarkeWrightSolver implements Solver {
         return tmp;
     }
 
-    @Override
-    public Optional<Solution> solve(Instance instance, TDFunction tdFunction, int expectedNumberOfVehicles) {
-        return solve(instance, tdFunction);
-    }
-
     private boolean improveRoutes(Collection<Route> routes, RouteTravelTimeCalculator calculator) {
         Route minRoute = null;
 
