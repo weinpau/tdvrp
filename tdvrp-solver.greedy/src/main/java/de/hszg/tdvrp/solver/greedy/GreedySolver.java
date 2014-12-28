@@ -83,16 +83,32 @@ public class GreedySolver implements Solver {
 
     private Stack<Customer> findRoute(List<Stack<Customer>> routes, Customer next, Instance instance, TDFunction tdFunction) {
         Stack<Customer> result = null;
-        double distance = Double.POSITIVE_INFINITY;
+        double bestCosts = Double.POSITIVE_INFINITY;
 
         for (Stack<Customer> candidate : routes) {
-            double d = candidate.peek().getPosition().distance(next.getPosition());
-            if (isValid(instance, tdFunction, candidate, next) && d < distance) {
+            double c = costs(candidate, next, instance, tdFunction);
+            if (isValid(instance, tdFunction, candidate, next) && c < bestCosts) {
                 result = candidate;
-                distance = d;
+                bestCosts = c;
             }
         }
         return result;
+    }
+
+    private double costs(Stack<Customer> route, Customer next, Instance instance, TDFunction tdFunction) {
+        double time = 0;
+        Numberable position = instance.getDepot();
+        for (Customer c : route) {
+            time += tdFunction.travelTime(position, c, time);
+            position = c;
+            time = Math.max(c.getReadyTime(), time) + c.getServiceTime();
+        }
+        time += tdFunction.travelTime(position, next, time);
+        time = Math.max(next.getReadyTime(), time);
+
+        time += next.getServiceTime();
+        time += tdFunction.travelTime(next, instance.getDepot(), time);
+        return time;
     }
 
     private List<Stack<Customer>> initRoutes(int expectedNumberOfVehicles, Instance instance, PriorityQueue<Customer> unallocated) {
