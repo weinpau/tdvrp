@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- *
+ * This class provides a sequential savings algorithm by Clarke and Wright (1964).
+ * 
  * @author weinpau
  */
 public class ClarkeWrightSolver implements Solver {
@@ -29,11 +30,11 @@ public class ClarkeWrightSolver implements Solver {
     public Optional<Solution> solve(Instance instance, TDFunction tdFunction) {
 
         List<Hob> hobs = new ArrayList<>();
-        int[] route = instance.getCustomers().stream().mapToInt(c -> c.getNumber()).toArray();
+        int[] C = instance.getCustomers().stream().mapToInt(c -> c.getNumber()).toArray();
 
-        while (route.length > 0) {
+        while (C.length > 0) {
 
-            HobQueue queue = new HobQueue(instance, tdFunction, route);
+            HobQueue queue = new HobQueue(instance, tdFunction, C);
             Hob bestHob = null;
 
             if (queue.isEmpty()) {
@@ -56,12 +57,12 @@ public class ClarkeWrightSolver implements Solver {
             }
             if (bestHob != null) {
                 hobs.add(bestHob);
-                route = reduceRoute(route, bestHob);
+                C = sub(C, bestHob.route());
             }
         }
-        Collection<Route> routes = createRoutes(instance, hobs, route);
+        Collection<Route> routes = createRoutes(instance, hobs, C);
 
-        System.out.println("improve routes: " + improveRoutes(routes, new RouteTravelTimeCalculator(instance, tdFunction)));
+        improveRoutes(routes, new RouteTravelTimeCalculator(instance, tdFunction));
 
         Solution solution = new Solution(instance, tdFunction, routes);
         return Optional.of(solution);
@@ -85,14 +86,14 @@ public class ClarkeWrightSolver implements Solver {
         return result;
     }
 
-    private int[] reduceRoute(int[] route, Hob bestHob) {
-        int[] tmp = new int[route.length - bestHob.route().length];
+    private int[] sub(int[] a, int[] b) {
+        int[] tmp = new int[a.length - b.length];
         int j = 0;
-        int[] t = Arrays.copyOf(bestHob.route(), bestHob.route().length);
+        int[] t = Arrays.copyOf(b, b.length);
         Arrays.sort(t);
-        for (int i = 0; i < route.length; i++) {
-            if (Arrays.binarySearch(t, route[i]) < 0) {
-                tmp[j++] = route[i];
+        for (int i = 0; i < a.length; i++) {
+            if (Arrays.binarySearch(t, a[i]) < 0) {
+                tmp[j++] = a[i];
             }
         }
         return tmp;

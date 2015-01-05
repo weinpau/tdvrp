@@ -60,6 +60,10 @@ public class Solution {
     public boolean isValid() {
         Set<Customer> customers = new HashSet<>(instance.getCustomers());
 
+//        if (getRoutes().size() > instance.getAvailableVehicles()) {
+//            return false;
+//        }
+
         for (Route route : getRoutes()) {
             if (route.getCustomers().stream().mapToDouble(c -> c.getDemand()).sum() > instance.getVehicleCapacity()) {
                 return false;

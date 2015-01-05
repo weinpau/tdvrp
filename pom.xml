@@ -18,8 +18,9 @@
        
         <module>tdvrp-solver.ga</module>
         <module>tdvrp-solver.random</module>
-        <module>tdvrp-solver.greedy</module>
         <module>tdvrp-solver.clarke</module>
+        <module>tdvrp-solver.pnnh</module>
+        <module>tdvrp-solver.ih</module>
             
         <module>tdvrp-scheduler.greedy</module>
         <module>tdvrp-scheduler.straight</module>
@@ -28,7 +29,7 @@
         <module>tdvrp-server</module>
         <module>tdvrp-benchmark</module>
         <module>tdvrp-benchmark.ga</module>
-
+    
     </modules>
     
     <dependencyManagement>

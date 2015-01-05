@@ -6,9 +6,9 @@
         <artifactId>tdvrp</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>tdvrp-solver.greedy</artifactId>
+    <artifactId>tdvrp-solver.ih</artifactId>
+    <description>This module contains a insertion heuristic.</description>
     <packaging>jar</packaging>
-    <description>This module contains a simple greedy-heuristic solver.</description>
     <dependencies>     
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -16,5 +16,4 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
-    <name>tdvrp-solver.greedy</name>
 </project>

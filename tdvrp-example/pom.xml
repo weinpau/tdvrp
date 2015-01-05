@@ -45,7 +45,17 @@
         </dependency>            
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>tdvrp-solver.greedy</artifactId>
+            <artifactId>tdvrp-solver.pnnh</artifactId>
+            <version>${project.version}</version>
+        </dependency>  
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>tdvrp-solver.ih</artifactId>
+            <version>${project.version}</version>
+        </dependency> 
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>tdvrp-solver.irci</artifactId>
             <version>${project.version}</version>
         </dependency>  
         <dependency>

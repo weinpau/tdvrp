@@ -7,6 +7,7 @@
         <version>1.0.0</version>
     </parent>
     <artifactId>tdvrp-solver.random</artifactId>
+    <description>This module contains a random-based route builder</description>
     <packaging>jar</packaging>
      <dependencies>     
         <dependency>

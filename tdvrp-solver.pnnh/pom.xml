@@ -6,9 +6,9 @@
         <artifactId>tdvrp</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>tdvrp-solver.clarke</artifactId>
-    <description>This module contains a sequential savings algorithm.</description>
+    <artifactId>tdvrp-solver.pnnh</artifactId>
     <packaging>jar</packaging>
+    <description>This module contains a simple parallel nearest neighbor heuristic.</description>
     <dependencies>     
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -16,5 +16,5 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
-    
+    <name>tdvrp-solver.pnnh</name>
 </project>

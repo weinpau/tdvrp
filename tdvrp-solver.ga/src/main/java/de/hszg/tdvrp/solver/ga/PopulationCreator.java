@@ -8,7 +8,8 @@ import de.hszg.tdvrp.core.solver.Solver;
 import de.hszg.tdvrp.core.tdfunction.TDFunction;
 import de.hszg.tdvrp.solver.clarke.ClarkeWrightSolver;
 import de.hszg.tdvrp.solver.ga.mutation.TWORS;
-import de.hszg.tdvrp.solver.greedy.GreedySolver;
+import de.hszg.tdvrp.solver.ih.InsertionHeuristic;
+import de.hszg.tdvrp.solver.pnnh.PNNHeuristic;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -28,8 +29,12 @@ public final class PopulationCreator {
 
         List<Chromosome> chromosomes = new ArrayList<>(options.populationSize());
 
-        addSolution(new GreedySolver(), instance, tdFunction, options, chromosomes);
+        addSolution(new PNNHeuristic(), instance, tdFunction, options, chromosomes);
         addSolution(new ClarkeWrightSolver(), instance, tdFunction, options, chromosomes);
+        addSolution(new InsertionHeuristic(1, 1, 1, 0), instance, tdFunction, options, chromosomes);
+        addSolution(new InsertionHeuristic(1, 2, 1, 0), instance, tdFunction, options, chromosomes);
+        addSolution(new InsertionHeuristic(1, 1, 0, 1), instance, tdFunction, options, chromosomes);
+        addSolution(new InsertionHeuristic(1, 2, 0, 1), instance, tdFunction, options, chromosomes);
         expandPopulation(chromosomes, options);
 
         return new Population(chromosomes);

@@ -15,7 +15,8 @@ import java.util.Stack;
 import java.util.stream.Collectors;
 
 /**
- *
+ * This class implements a simple random-based route builder.
+ * 
  * @author weinpau
  */
 public class RandomSolver implements Solver {

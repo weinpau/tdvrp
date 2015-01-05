@@ -1,4 +1,4 @@
-package de.hszg.tdvrp.solver.greedy;
+package de.hszg.tdvrp.solver.pnnh;
 
 import de.hszg.tdvrp.core.model.Customer;
 import de.hszg.tdvrp.core.model.Instance;
@@ -15,16 +15,17 @@ import java.util.Stack;
 import java.util.stream.Collectors;
 
 /**
- * A simple solver, which distributes tasks without optimization on the
- * available vehicles.
+ * A parallel nearest neighbor heuristic. Customers will be prioritized
+ * according to the dueTime, though always the nearest vehicle performs the
+ * task.
  *
  * @author weinpau
  */
-public class GreedySolver implements Solver {
+public class PNNHeuristic implements Solver {
 
     @Override
     public String getName() {
-        return "GREEDY_SOLVER";
+        return "PNNH_SOLVER";
     }
 
     @Override
@@ -48,7 +49,7 @@ public class GreedySolver implements Solver {
         return result;
 
     }
-    
+
     private Optional<Solution> solve(Instance instance, TDFunction tdFunction, int expectedNumberOfVehicles) {
 
         PriorityQueue<Customer> unallocated = new PriorityQueue<>((a, b) -> Double.compare(a.getDueTime(), b.getDueTime()));
@@ -81,7 +82,7 @@ public class GreedySolver implements Solver {
         double bestCosts = Double.POSITIVE_INFINITY;
 
         for (Stack<Customer> candidate : routes) {
-            double c = costs(candidate, next, instance, tdFunction);
+            double c = costs(candidate, next);
             if (isValid(instance, tdFunction, candidate, next) && c < bestCosts) {
                 result = candidate;
                 bestCosts = c;
@@ -90,20 +91,8 @@ public class GreedySolver implements Solver {
         return result;
     }
 
-    private double costs(Stack<Customer> route, Customer next, Instance instance, TDFunction tdFunction) {
-        double time = 0;
-        Numberable position = instance.getDepot();
-        for (Customer c : route) {
-            time += tdFunction.travelTime(position, c, time);
-            position = c;
-            time = Math.max(c.getReadyTime(), time) + c.getServiceTime();
-        }
-        time += tdFunction.travelTime(position, next, time);
-        time = Math.max(next.getReadyTime(), time);
-
-        time += next.getServiceTime();
-        time += tdFunction.travelTime(next, instance.getDepot(), time);
-        return time;
+    private double costs(Stack<Customer> route, Customer next) {
+        return route.peek().getPosition().distance(next.getPosition());
     }
 
     private List<Stack<Customer>> initRoutes(int expectedNumberOfVehicles, Instance instance, PriorityQueue<Customer> unallocated) {

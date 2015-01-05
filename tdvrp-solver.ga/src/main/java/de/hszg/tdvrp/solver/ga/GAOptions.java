@@ -16,7 +16,7 @@ public final class GAOptions {
 
     private int maxRounds = 200000;
     private int maxRoundsWithoutImproving = 10000;
-    private double selectionRate = .6;
+    private double selectionRate = .4;
     private double mutationProbability = 0.3;
 
     private Selection selection = new RouletteSelection();

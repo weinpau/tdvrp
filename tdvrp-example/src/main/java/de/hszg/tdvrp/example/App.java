@@ -9,8 +9,10 @@ import de.hszg.tdvrp.core.tdfunction.TDFunction;
 import de.hszg.tdvrp.core.tdfunction.TDFunctionFactory;
 import de.hszg.tdvrp.instances.Instances;
 import de.hszg.tdvrp.scheduler.straight.StraightScheduler;
+import de.hszg.tdvrp.solver.clarke.ClarkeWrightSolver;
 import de.hszg.tdvrp.solver.ga.GASolver;
-import de.hszg.tdvrp.solver.greedy.GreedySolver;
+import de.hszg.tdvrp.solver.ih.InsertionHeuristic;
+import de.hszg.tdvrp.solver.pnnh.PNNHeuristic;
 import de.hszg.tdvrp.tdfactories.TDFunctionFactories;
 
 /**
@@ -22,14 +24,14 @@ public class App {
     public static void main(String[] args) {
 
             // load the instance
-            Instance instance = Instances.getInstanceByName("100_RC101").get();
+            Instance instance = Instances.getInstanceByName("100_RC104").get();
 
             // create the time-dependent function
             TDFunctionFactory tdFunctionFactory = TDFunctionFactories.getFactoryByName("DEFAULT").get();
             TDFunction tdFunction = tdFunctionFactory.createTDFunction(instance);
 
             // instantiate the solver
-            Solver solver = new GreedySolver();
+            Solver solver = new GASolver();
 
             // search for a solution
             Solution solution = solver.solve(instance, tdFunction).orElse(null);

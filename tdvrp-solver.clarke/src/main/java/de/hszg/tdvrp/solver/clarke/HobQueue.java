@@ -17,17 +17,17 @@ public class HobQueue extends PriorityQueue<Hob> {
 
     RouteTravelTimeCalculator travelTimeCalculator;
 
-    public HobQueue(Instance instance, TDFunction tdFunction, int[] route) {
+    public HobQueue(Instance instance, TDFunction tdFunction, int[] C) {
         this.instance = instance;
         this.tdFunction = tdFunction;
         travelTimeCalculator = new RouteTravelTimeCalculator(instance, tdFunction);
 
-        for (int i = 0; i < route.length; i++) {
-            for (int j = i + 1; j < route.length; j++) {
-                double c = travelTimeCalculator.travelTime(new int[]{route[i]});
-                c += travelTimeCalculator.travelTime(new int[]{route[j]});
+        for (int i = 0; i < C.length; i++) {
+            for (int j = i + 1; j < C.length; j++) {
+                double c = travelTimeCalculator.travelTime(new int[]{C[i]});
+                c += travelTimeCalculator.travelTime(new int[]{C[j]});
 
-                Hob hob = createHob(new int[]{route[i], route[j]}, new int[]{route[j], route[i]}, c);
+                Hob hob = createHob(new int[]{C[i], C[j]}, new int[]{C[j], C[i]}, c);
 
                 if (hob != null) {
                     offer(hob);
