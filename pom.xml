@@ -21,7 +21,8 @@
         <module>tdvrp-solver.clarke</module>
         <module>tdvrp-solver.pnnh</module>
         <module>tdvrp-solver.ih</module>
-            
+        <module>tdvrp-solver.impact</module>
+                
         <module>tdvrp-scheduler.greedy</module>
         <module>tdvrp-scheduler.straight</module>
         
