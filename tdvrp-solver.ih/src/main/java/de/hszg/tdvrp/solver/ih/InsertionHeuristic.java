@@ -25,17 +25,13 @@ import java.util.Set;
  */
 public class InsertionHeuristic implements Solver {
 
-    private double my = 1, lambda = 1, alpha1 = 1, alpha2 = 0;
-
-    public InsertionHeuristic() {
-    }
-
-    public InsertionHeuristic(double my, double lambda, double alpha1, double alpha2) {
-        this.my = my;
-        this.lambda = lambda;
-        this.alpha1 = alpha1;
-        this.alpha2 = alpha2;
-    }
+    private final static double[][] PARAMETERS = new double[][]{
+        {1, 1, 1, 0},
+        {1, 2, 1, 0},
+        {1, 1, 0, 1},
+        {1, 2, 0, 1},
+        {1, 1, .5, .5},
+        {1, 2, .5, .5}};
 
     @Override
     public String getName() {
@@ -45,15 +41,26 @@ public class InsertionHeuristic implements Solver {
     @Override
     public Optional<Solution> solve(Instance instance, TDFunction tdFunction) {
 
-        Set<Customer> customers = new HashSet<>(instance.getCustomers());
-        List<int[]> routes = new ArrayList<>();
-        while (!customers.isEmpty()) {
-            RouteInsertion routeInsertion = new RouteInsertion(instance, tdFunction, customers);
-            routeInsertion.solve();
-            routes.add(routeInsertion.getRoute());
-        }
+        List<int[]> bestRoutes = null;
+        double lowestCost = Double.POSITIVE_INFINITY;
 
-        return Optional.of(toSolution(routes, instance, tdFunction));
+        for (double[] param : PARAMETERS) {
+
+            Set<Customer> customers = new HashSet<>(instance.getCustomers());
+            List<int[]> routes = new ArrayList<>();
+            while (!customers.isEmpty()) {
+                RouteInsertion routeInsertion = new RouteInsertion(instance, tdFunction, customers, param[0], param[1], param[2], param[3]);
+                routeInsertion.solve();
+                routes.add(routeInsertion.getRoute());
+            }
+            double cost = cost(instance, tdFunction, routes);
+
+            if (cost < lowestCost) {
+                lowestCost = cost;
+                bestRoutes = routes;
+            }
+        }
+        return Optional.of(toSolution(bestRoutes, instance, tdFunction));
     }
 
     private Solution toSolution(Collection<int[]> routes, Instance instance, TDFunction tdFuntion) {
@@ -64,9 +71,7 @@ public class InsertionHeuristic implements Solver {
         for (int[] r : routes) {
             List<Customer> cls = new ArrayList<>();
             for (int i = 1; i < r.length - 1; i++) {
-
                 cls.add(allCustomers.get(r[i] - 1));
-
             }
             rls.add(new Route(cls));
         }
@@ -74,18 +79,50 @@ public class InsertionHeuristic implements Solver {
         return new Solution(instance, tdFuntion, rls);
     }
 
+    private double cost(Instance instance, TDFunction tdFunction, Collection<int[]> routes) {
+        double totalDuration = 0;
+        for (int[] r : routes) {
+            totalDuration += assumedTravelTime(instance, tdFunction, r);
+        }
+        return routes.size() + totalDuration / (instance.getDepot().getClosingTime() * routes.size());
+    }
+
+    private double assumedTravelTime(Instance instance, TDFunction tdFunction, int[] route) {
+        double departureTime = 0;
+        double totalTravelTime = 0;
+        List<Customer> customers = instance.getCustomers();
+        int position = 0;
+        for (int i = 1; i < route.length - 1; i++) {
+            int customer = route[i];
+            double travelTime = tdFunction.travelTime(position, customer, departureTime);
+            totalTravelTime += travelTime;
+            double arrivialTime = departureTime + travelTime;
+            position = customer;
+            departureTime = Math.max(arrivialTime, customers.get(position - 1).getReadyTime()) + customers.get(position - 1).getServiceTime();
+        }
+        if (route.length != 0) {
+            totalTravelTime += tdFunction.travelTime(route[route.length - 1], 0, departureTime);
+        }
+        return totalTravelTime;
+    }
+
     private class RouteInsertion {
 
+        private final double my, lambda, alpha1, alpha2;
         private final Instance instance;
         private final TDFunction tdFunction;
         private final double d[][];
         private final Set<Customer> customers;
         private int[] route = new int[]{0, 0};
 
-        public RouteInsertion(Instance instance, TDFunction tdFunction, Set<Customer> customers) {
+        public RouteInsertion(Instance instance, TDFunction tdFunction, Set<Customer> customers, double my, double lambda, double alpha1, double alpha2) {
             this.instance = instance;
             this.tdFunction = tdFunction;
             this.customers = customers;
+            this.my = my;
+            this.lambda = lambda;
+            this.alpha1 = alpha1;
+            this.alpha2 = alpha2;
             d = instance.distanceMatrix();
         }
 
