@@ -16,9 +16,11 @@ The solution and optimization process is divided into two phases:
 
 
 #### Implemented solvers ####
-
-- [Constructive solver](tdvrp-solver.dummy/) - a constructive solver, which distributes tasks without travel time optimization
-- [GA solver](tdvrp-solver.ga/) - a genetic solver algorithm
+- [Savings heuristic](tdvrp-solver.clarke/) - a saving algorithm
+- [Insertion heuristic](tdvrp-solver.ih/)- a insertion method by Solomon (1987)
+- [IMPACT](tdvrp-solver.impact/) - a greedy look-ahead heuristic by Ioannou et al. (2001)
+- [PNNH](tdvrp-solver.pnnh/) - a parallel nearest neighbor heuristic, which distributes tasks without travel time optimization
+- [GA](tdvrp-solver.ga/) - a genetic solver algorithm
 
 #### Implemented schedulers ####
 
