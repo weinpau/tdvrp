@@ -1,6 +1,6 @@
 ## Solver for time-dependent VRPs ##
 
-This project is a student project which is developed as part of a research project at the [Hochschule Zittau/Görlitz](http://www.hszg.de/).
+This project is a student project which is developed as part of a research project at the [Hochschule Zittau/Görlitz](http://www.hszg.de/). 
 
 The vehicle routing problem with time windows (VRPTW) models many practical optimisation problems in logistics or maintenance of geographically distributed organisations. In practice, the classical model is often not adequate because constant travel times between locations are assumed. Time-varying factors, such as traffic conditions or weather have a significant impact on the actual travel time. Therefore, the travel time between two locations, depends on the specific departure time. To represent these external influences, the VRPTW is extended to a time-dependent vehicle routing problem with time windows (TDVRP). In this case the changing driving time is represented by a time-dependent function. 
 
@@ -10,6 +10,9 @@ The solution and optimization process is divided into two phases:
 
 1. Routing (solver) - the goal is to find a valid best possible order of tasks / customers.
 2. Scheduling - the goal is to determine the optimal travel times between the customer and the start times of the tasks.
+
+The full results of the work are summarized in the paper [An efective solution method for the
+time-dependent vehicle routing problem](https://github.com/weinpau/tdvrp/blob/master/paper/An%20effective%20solution%20method%20for%20the%20time-dependent%20vehicle%20routing%20problem.pdf).
 
 
 ### Features ###
